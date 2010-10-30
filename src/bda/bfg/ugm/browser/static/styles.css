@@ -1,8 +1,22 @@
+/* general */
 body {
 	margin:0;
 	padding:0;
-	font-family:Times;
+	font-family:Arial;
+	color:#333;
+	font-size:90%;
 }
+label {
+    display:block;
+	font-weight:bold;
+}
+form .field {
+	margin-bottom:6px;
+}
+form .field div.error {
+	color:red;
+}
+/* main layout styles */
 #wrapper {
 	margin:0;
 	padding:0;
@@ -25,6 +39,7 @@ h1#logo a {
 	font-size:40px;
 	color:#fff;
 	font-weight: normal;
+	font-family:Times;
 }
 div#menu {
 	position:absolute;
@@ -63,6 +78,7 @@ div#content {
 	padding-left:12px;
 }
 div#footer {
+	clear:both;
 	padding-left:12px;
 	font-size:80%;
 	color:#aaa;
@@ -71,4 +87,22 @@ div#footer a {
 	text-decoration:none;
 	font-weight:bold;
     color:#aaa;
+}
+/* box background */
+div.box,
+#form-loginform {
+	background: url('/bda.bfg.ugm.static/box.gif') top left no-repeat;
+	padding:30px;
+}
+/* columns */
+div.columns div.column {
+	float:left;
+}
+div.column {
+	min-width:500px;
+	height:300px; /* tmp */
+}
+/* root content */
+div.section {
+	margin-bottom:12px;
 }

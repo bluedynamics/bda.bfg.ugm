@@ -1,3 +1,12 @@
-<div>
-  Root content
+<div class="section box">
+  <h3>User Management</h3>
+  <p>Lorem Ipsum</p>
+</div>
+<div class="section box">
+  <h3>Group Management</h3>
+  <p>Lorem Ipsum</p>
+</div>
+<div class="section box">
+  <h3>Settings</h3>
+  <p>Lorem Ipsum</p>
 </div>
