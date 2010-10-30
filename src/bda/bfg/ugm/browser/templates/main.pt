@@ -54,7 +54,9 @@
           <tal:mainmenu replace="structure tile('mainmenu')" />
         </div>
         
-        <tal:navtree replace="structure tile('personaltools')" />
+        <tal:block condition="False">
+          <tal:navtree replace="structure tile('personaltools')" />
+        </tal:block>
       
       </div>
 

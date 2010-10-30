@@ -15,3 +15,8 @@ Root Application Node
     
     >>> root.metadata
     <bda.bfg.app.model.BaseMetadata object at ...>
+    
+Causes ``&nbsp`` to be rendered instead of title for mainmenu links.
+
+    >>> root.properties.mainmenu_empty_title
+    True

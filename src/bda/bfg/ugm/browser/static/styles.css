@@ -1,0 +1,74 @@
+body {
+	margin:0;
+	padding:0;
+	font-family:Times;
+}
+#wrapper {
+	margin:0;
+	padding:0;
+}
+#header {
+	position:relative;
+	height:60px;
+	/*background-color:#23de10;*/
+	background-color:#00fc00;
+}
+h1#logo {
+	position:absolute;
+	top:3px;
+	left:12px;
+	margin:0;
+	text-shadow:#aaa 1px 1px 1px;
+}
+h1#logo a {
+	text-decoration:none;
+	font-size:40px;
+	color:#fff;
+	font-weight: normal;
+}
+div#menu {
+	position:absolute;
+	left: 140px;
+	top: 33px;
+}
+ul#mainmenu {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+ul#mainmenu li {
+	display:inline;
+	margin-right:20px;
+}
+ul#mainmenu li a {
+    text-decoration:none;
+	padding-left:46px;
+	line-height:51px;
+	font-size:51px;
+}
+ul#mainmenu li.node-users a {
+	background: url('/bda.bfg.ugm.static/menu_users.png') top left no-repeat;
+}
+ul#mainmenu li.node-users a.current_page_item {
+    background: url('/bda.bfg.ugm.static/menu_users_selected.png') top left no-repeat;
+}
+ul#mainmenu li.node-groups a {
+    background: url('/bda.bfg.ugm.static/menu_groups.png') top left no-repeat;
+}
+ul#mainmenu li.node-groups a.current_page_item {
+    background: url('/bda.bfg.ugm.static/menu_groups_selected.png') top left no-repeat;
+}
+div#content {
+	padding-top:12px;
+	padding-left:12px;
+}
+div#footer {
+	padding-left:12px;
+	font-size:80%;
+	color:#aaa;
+}
+div#footer a {
+	text-decoration:none;
+	font-weight:bold;
+    color:#aaa;
+}

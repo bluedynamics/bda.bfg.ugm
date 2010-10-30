@@ -19,6 +19,7 @@ class Root(FactoryNode):
     @property
     def properties(self):
         props = Properties()
+        props.mainmenu_empty_title = True
         return props
     
     @property
