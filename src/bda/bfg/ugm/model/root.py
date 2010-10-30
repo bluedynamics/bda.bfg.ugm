@@ -20,6 +20,7 @@ class Root(FactoryNode):
     def properties(self):
         props = Properties()
         props.mainmenu_empty_title = True
+        props.default_child = 'users'
         return props
     
     @property

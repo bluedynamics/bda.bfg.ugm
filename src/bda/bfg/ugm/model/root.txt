@@ -20,3 +20,6 @@ Causes ``&nbsp`` to be rendered instead of title for mainmenu links.
 
     >>> root.properties.mainmenu_empty_title
     True
+    
+    >>> root.properties.default_child
+    'users'
