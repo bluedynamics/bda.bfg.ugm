@@ -1,30 +1,4 @@
-import logging
-from bda.bfg.app.model import (
-    FactoryNode,
-    Properties,
-    BaseMetadata,
-)
-
-logger = logging.getLogger('bda.bgf.ugm')
-
-class Root(FactoryNode):
-    """Root Node.
-    """
-    
-    factories = {
-    }
-    
-    @property
-    def properties(self):
-        props = Properties()
-        props.in_navtree = True
-        return props
-    
-    @property
-    def metadata(self):
-        metadata = BaseMetadata()
-        metadata.title = "UGM"
-        return metadata
+from bda.bfg.ugm.model.root import Root
 
 root = Root()
 
