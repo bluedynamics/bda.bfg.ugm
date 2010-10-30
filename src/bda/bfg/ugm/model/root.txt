@@ -1,0 +1,16 @@
+Root Application Node
+=====================
+
+    >>> from bda.bfg.ugm.model import get_root
+    >>> root = get_root(None)
+    >>> root
+    <Root object 'None' at ...>
+    
+    >>> root.factories
+    {}
+    
+    >>> root.properties
+    <bda.bfg.app.model.Properties object at ...>
+    
+    >>> root.metadata
+    <bda.bfg.app.model.BaseMetadata object at ...>
