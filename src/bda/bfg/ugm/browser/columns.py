@@ -1,11 +1,15 @@
-from bda.bfg.tile import registerTile
+from bda.bfg.tile import (
+    tile,
+    registerTile,
+    render_tile,
+)
 from bda.bfg.app.browser.layout import ProtectedContentTile
 from bda.bfg.ugm.model.root import Root
 from bda.bfg.ugm.model.users import Users
 from bda.bfg.ugm.model.groups import Groups
 
 ###############################################################################
-# content tiles for Users and Groups, rendering left and right column
+# Content tiles for Root, Users and Groups, rendering left and right column
 ###############################################################################
 
 registerTile('content',
@@ -30,61 +34,22 @@ registerTile('content',
              strict=False)
 
 ###############################################################################
-# left and right columns for root. they proxy columns for users
+# Columns for Root. They proxy columns for Users as default.
 ###############################################################################
 
-# XXX: Class style tiles
+class RootColumn(ProtectedContentTile):
+    
+    def _render(self, name):
+        return render_tile(self.model['users'], self.request, name)
 
-registerTile('leftcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Root,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
+@tile('leftcolumn', interface=Root, permission='login', strict=False)
+class RootLeftColumn(RootColumn):
+    
+    def render(self):
+        return self._render('leftcolumn')
 
-registerTile('rightcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Root,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
-
-###############################################################################
-# left and right columns for users
-###############################################################################
-
-# XXX: Class style tiles
-
-registerTile('leftcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Users,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
-
-registerTile('rightcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Users,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
-
-###############################################################################
-# left and right columns for groups
-###############################################################################
-
-# XXX: Class style tiles
-
-registerTile('leftcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Groups,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
-
-registerTile('rightcolumn',
-             'bda.bfg.ugm:browser/templates/column.pt',
-             interface=Groups,
-             class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
+@tile('rightcolumn', interface=Root, permission='login', strict=False)
+class RootRightColumn(RootColumn):
+    
+    def render(self):
+        return self._render('rightcolumn')
