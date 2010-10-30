@@ -1,0 +1,54 @@
+<tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
+  <div class="box">
+
+    <h3>LDAP Settings</h3>
+
+    <a href="${context.nodeurl}/edit?from=parent"
+       ajax:target="${context.nodeurl}/edit?from=parent"
+       ajax:event="contextchanged:.contextsensitiv
+                   contextchanged:#content"
+       ajax:bind="click"
+       class="edit16_16"
+       title="Edit">
+      &nbsp;
+    </a>
+      
+    <table>
+      <tr>
+        <td><strong>Server:</strong></td>
+        <td tal:content="model.attrs.server">localhost</td>
+      </tr>
+      <tr>
+        <td><strong>Port:</strong></td>
+        <td tal:content="model.attrs.port">8983</td>
+      </tr>
+      <tr>
+        <td><strong>Manager DN:</strong></td>
+        <td tal:content="model.attrs.user"></td>
+      </tr>
+      <tr>
+        <td><strong>Manager Password:</strong></td>
+        <td tal:content="model.attrs.password"></td>
+      </tr>
+      <tr>
+        <td><strong>Users DN:</strong></td>
+        <td tal:content="model.attrs.users_dn"></td>
+      </tr>
+      <tr>
+        <td><strong>Groups DN:</strong></td>
+        <td tal:content="model.attrs.groups_dn"></td>
+      </tr>
+    </table>
+
+    <p>
+      Server Connection:
+      <strong tal:define="status context.ldap_status"
+              tal:content="status"
+              tal:attributes="style status == 'OK'
+                                    and 'color:green;'
+                                    or 'color:red;'">
+        OK
+      </strong>
+    </p>
+  </div>
+</tal:ajax>

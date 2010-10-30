@@ -6,6 +6,7 @@ from bda.bfg.app.model import (
 )
 from bda.bfg.ugm.model.users import Users
 from bda.bfg.ugm.model.groups import Groups
+from bda.bfg.ugm.model.settings import Settings
 
 class Root(FactoryNode):
     """Root Node.
@@ -14,11 +15,14 @@ class Root(FactoryNode):
     factories = odict((
         ('users', Users),
         ('groups', Groups),
+        ('settings', Settings),
     ))
     
     @property
     def properties(self):
         props = Properties()
+        props.in_navtree = False
+        props.editable = False
         props.mainmenu_empty_title = True
         props.default_child = 'users'
         return props

@@ -73,6 +73,12 @@ ul#mainmenu li.node-groups a {
 ul#mainmenu li.node-groups a.current_page_item {
     background: url('/bda.bfg.ugm.static/menu_groups_selected.png') top left no-repeat;
 }
+ul#mainmenu li.node-settings a {
+    background: url('/bda.bfg.ugm.static/menu_settings.png') top left no-repeat;
+}
+ul#mainmenu li.node-settings a.current_page_item {
+    background: url('/bda.bfg.ugm.static/menu_settings_selected.png') top left no-repeat;
+}
 div#content {
 	padding-top:12px;
 	padding-left:12px;

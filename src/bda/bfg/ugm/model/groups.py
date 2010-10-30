@@ -9,12 +9,6 @@ class Groups(BaseNode):
     """
     
     @property
-    def properties(self):
-        props = Properties()
-        props.editable = False
-        return props
-    
-    @property
     def metadata(self):
         metadata = BaseMetadata()
         metadata.title = "Groups"
