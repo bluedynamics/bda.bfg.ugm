@@ -1,0 +1,26 @@
+Users Application Node
+=======================
+
+    >>> from bda.bfg.ugm.model.users import Users
+    >>> users = Users()
+
+Check Properties.
+::
+
+    >>> props = users.properties
+
+Users object is not editable.
+::
+
+    >>> props.editable
+    False
+
+Check Metadata.
+::
+
+    >>> md = users.metadata
+    >>> md.title
+    'Users'
+    
+    >>> md.description
+    'Container for Users'

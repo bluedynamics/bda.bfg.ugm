@@ -1,24 +1,28 @@
+from odict import odict
 from bda.bfg.app.model import (
     FactoryNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.users import Users
+from bda.bfg.ugm.model.groups import Groups
 
 class Root(FactoryNode):
     """Root Node.
     """
     
-    factories = {
-    }
+    factories = odict((
+        ('users', Users),
+        ('groups', Groups),
+    ))
     
     @property
     def properties(self):
         props = Properties()
-        props.in_navtree = True
         return props
     
     @property
     def metadata(self):
         metadata = BaseMetadata()
-        metadata.title = "UGM"
+        metadata.title = "ugm"
         return metadata
