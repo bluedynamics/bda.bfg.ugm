@@ -1,2 +1,11 @@
+*.pyc
 .project
 .pydevproject
+.installed.cfg
+.mr.developer.cfg
+src/bda.bfg.ugm.egg-info
+bin
+develop-eggs
+devsrc
+eggs
+parts
