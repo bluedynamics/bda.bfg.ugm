@@ -108,7 +108,6 @@ div.columns div.column {
 }
 div.column {
 	min-width:500px;
-	height:300px; /* tmp */
 }
 /* add button */
 div.add_button {
@@ -144,6 +143,32 @@ div.column .batch strong {
 }
 /* column listing */
 div.columnlisting {
-	border:#ccc 1px solid;
+	border-left:#ccc 1px solid;
+	border-bottom:#ccc 1px solid;
 	margin-top:12px;
+	overflow-y:scroll;
+}
+div.left_column div.columnlisting {
+    height:400px;
+}
+div.columnlisting ul {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+div.columnlisting li {
+	clear:both;
+    border-bottom:#ccc 1px solid;
+}
+div.columnlisting div.left {
+	float:left;
+	width:160px;
+	overflow:hidden;
+	padding:2px;
+	border-right:#ccc 1px solid;
+}
+div.columnlisting div.right {
+	float:right;
+	overflow:hidden;
+	padding:2px;
 }

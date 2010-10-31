@@ -1,5 +1,17 @@
 <div class="columnlisting">
 
-  Column Listing
+  <ul>
+    <tal:item repeat="item context.items">
+      <li>
+        <div class="left"
+             tal:content="item['left']">left</div>
+        <div class="left"
+             tal:content="item['right']">right</div>
+        <div class="right">
+          actions goes here
+        </div>
+      </li>
+    </tal:item>
+  </ul>
 
 </div>
