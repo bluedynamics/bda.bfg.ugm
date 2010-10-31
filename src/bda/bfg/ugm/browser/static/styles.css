@@ -6,6 +6,12 @@ body {
 	color:#333;
 	font-size:90%;
 }
+hr {
+	border-style:solid;
+	border-width:1px 0 0 0;
+	border-color:#ccc;
+	margin:12px 0;
+}
 label {
     display:block;
 	font-weight:bold;
@@ -171,7 +177,7 @@ div.columnlisting div.right {
 }
 /* left column */
 div.left_column div.columnlisting {
-    height:400px;
+    height:450px;
 }
 /* right column */
 div.right_column #form-addform,
@@ -182,13 +188,32 @@ div.right_column #form-editform {
 div.right_column div.field {
 	width:300px;
 	clear:both;
-	padding-bottom:24px;
+	padding-bottom:20px;
 }
 div.right_column div.field label {
 	float:left;
-	font-size:90%;
+	font-size:80%;
+}
+div.right_column input {
+	font-size:80%;
 }
 div.right_column div.field input {
     float:right;
-	font-size:90%;
+}
+div.right_column div.columnlisting {
+    height:308px;
+}
+div.right_column div.column_limit {
+	float:right;
+	margin-right:24px;
+}
+div.right_column div.column_limit label {
+	display:inline;
+	float:left;
+	font-size:80%;
+	line-height:1.5em;
+}
+div.right_column div.column_limit input {
+    float:right;
+	font-size:80%;
 }

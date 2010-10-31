@@ -3,4 +3,19 @@
   <!-- XXX: let context render editform tile - other model required -->
   <tal:batch replace="structure tile('editform')" />
   
+  <hr />
+  
+  <div class="column_filter">
+    <input type="text" name="column_filter" value="filter listing" />
+  </div>
+  
+  <div class="column_limit">
+    <label>Show all</label>
+    <input type="checkbox" name="column_limit" />
+  </div>
+  
+  <tal:batch replace="structure tile('columnbatch')" />
+  
+  <tal:listing replace="structure tile('columnlisting')" />
+  
 </div>
