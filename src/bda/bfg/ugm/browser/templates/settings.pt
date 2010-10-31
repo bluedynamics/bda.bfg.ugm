@@ -1,8 +1,6 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
   <div class="box">
 
-    <h1>LDAP Settings</h1>
-
     <a href="${context.nodeurl}/edit"
        ajax:target="${context.nodeurl}"
        ajax:action="editform:#content:inner"
