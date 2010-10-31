@@ -11,6 +11,7 @@ TESTFILES = [
     'model/root.txt',
     'model/users.txt',
     'model/groups.txt',
+    'model/setting.txt',
 ]
 
 def test_suite():

@@ -8,7 +8,7 @@ from bda.bfg.ugm.model.users import Users
 from bda.bfg.ugm.model.groups import Groups
 from bda.bfg.ugm.model.settings import Settings
 
-class Root(FactoryNode):
+class Ugm(FactoryNode):
     """Root Node.
     """
     

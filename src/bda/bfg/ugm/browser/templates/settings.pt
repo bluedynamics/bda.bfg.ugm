@@ -1,12 +1,11 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
   <div class="box">
 
-    <h3>LDAP Settings</h3>
+    <h1>LDAP Settings</h1>
 
-    <a href="${context.nodeurl}/edit?from=parent"
-       ajax:target="${context.nodeurl}/edit?from=parent"
-       ajax:event="contextchanged:.contextsensitiv
-                   contextchanged:#content"
+    <a href="${context.nodeurl}/edit"
+       ajax:target="${context.nodeurl}"
+       ajax:action="editform:#content:inner"
        ajax:bind="click"
        class="edit16_16"
        title="Edit">
@@ -28,7 +27,7 @@
       </tr>
       <tr>
         <td><strong>Manager Password:</strong></td>
-        <td tal:content="model.attrs.password"></td>
+        <td tal:content="len(model.attrs.password) * '*'"></td>
       </tr>
       <tr>
         <td><strong>Users DN:</strong></td>

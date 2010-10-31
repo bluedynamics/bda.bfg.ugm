@@ -4,7 +4,7 @@ from bda.bfg.tile import (
     render_tile,
 )
 from bda.bfg.app.browser.layout import ProtectedContentTile
-from bda.bfg.ugm.model.root import Root
+from bda.bfg.ugm.model.root import Ugm
 from bda.bfg.ugm.model.users import Users
 from bda.bfg.ugm.model.groups import Groups
 
@@ -14,7 +14,7 @@ from bda.bfg.ugm.model.groups import Groups
 
 registerTile('content',
              'bda.bfg.ugm:browser/templates/columns.pt',
-             interface=Root,
+             interface=Ugm,
              class_=ProtectedContentTile,
              permission='login',
              strict=False)
@@ -42,13 +42,13 @@ class RootColumn(ProtectedContentTile):
     def _render(self, name):
         return render_tile(self.model['users'], self.request, name)
 
-@tile('leftcolumn', interface=Root, permission='login', strict=False)
+@tile('leftcolumn', interface=Ugm, permission='login', strict=False)
 class RootLeftColumn(RootColumn):
     
     def render(self):
         return self._render('leftcolumn')
 
-@tile('rightcolumn', interface=Root, permission='login', strict=False)
+@tile('rightcolumn', interface=Ugm, permission='login', strict=False)
 class RootRightColumn(RootColumn):
     
     def render(self):

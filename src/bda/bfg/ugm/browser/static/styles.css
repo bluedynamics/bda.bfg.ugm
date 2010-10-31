@@ -96,7 +96,9 @@ div#footer a {
 }
 /* box background */
 div.box,
-#form-loginform {
+#form-loginform,
+#form-addform,
+#form-editform {
 	background: url('/bda.bfg.ugm.static/box.gif') top left no-repeat;
 	padding:30px;
 }

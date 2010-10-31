@@ -35,6 +35,6 @@ class Settings(BaseNode):
     @property
     def metadata(self):
         metadata = BaseMetadata()
-        metadata.title = "Settings"
+        metadata.title = "LDAP Settings"
         metadata.description = "LDAP Connection Settings"
         return metadata

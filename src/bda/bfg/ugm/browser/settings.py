@@ -4,24 +4,14 @@ from bda.bfg.app.browser.layout import ProtectedContentTile
 from bda.bfg.app.browser.form import EditForm
 from bda.bfg.ugm.model.settings import Settings
 
-@tile('content', 'templates/settings.pt', interface=Settings,
-      permission='login', strict=False)
-class Settings(ProtectedContentTile):
-    
-    @property
-    def ldap_status(self):
-        # XXX
-        return 'OK'
-        #return 'Failed'
-
 @tile('editform', interface=Settings, permission="view")
-class DatabaseSettingsForm(EditForm):
+class LDAPSettingsForm(EditForm):
     
     @property
     def form(self):
         form = factory(u'form',
                        name='editform',
-                       props={'action': self.nodeurl})
+                       props={'action': '%s/edit' % self.nodeurl})
         form['server'] = factory(
             'field:label:error:text',
             value = self.model.attrs.server,
@@ -93,3 +83,13 @@ class DatabaseSettingsForm(EditForm):
         self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
         self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
         self.model()
+
+@tile('content', 'templates/settings.pt', interface=Settings,
+      permission='login', strict=False)
+class Settings(ProtectedContentTile):
+    
+    @property
+    def ldap_status(self):
+        # XXX
+        return 'OK'
+        #return 'Failed'
