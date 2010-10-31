@@ -20,9 +20,12 @@ class Settings(BaseNode):
         (Deny, Everyone, ALL_PERMISSIONS),
     ]
     
-    def __init__(self, name=None):
+    def __init__(self, name=None, _app_path=None):
+        """``_app_path`` defines an alternative path for app root and is
+        for testing purposes only
+        """
         BaseNode.__init__(self, name)
-        path = os.path.join(APP_PATH, 'etc', 'ldap.cfg')
+        path = os.path.join(_app_path or APP_PATH, 'etc', 'ldap.cfg')
         self._config = ConfigProperties(path)
     
     def __call__(self):
