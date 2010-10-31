@@ -1,8 +1,10 @@
 <div class="column box">
   
-  <form action="">
-    <input type="submit" name="add" value="${context.add_label}" />
-  </form>
+  <div class="add_button">
+    <form action="">
+      <input type="submit" name="add" value="${context.add_label}" />
+    </form>
+  </div>
   
   <div class="column_filter">
     <input type="text" name="column_filter" value="filter listing" />

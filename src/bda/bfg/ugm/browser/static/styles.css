@@ -110,3 +110,40 @@ div.column {
 	min-width:500px;
 	height:300px; /* tmp */
 }
+/* add button */
+div.add_button {
+	float:left;
+}
+div.add_button input {
+	font-size:80%;
+}
+/* column filter */
+div.column_filter {
+	float:right;
+}
+div.column_filter input {
+	color:#ccc;
+	font-size:80%;
+}
+/* column batch */
+div.column .batch {
+	clear:both;
+	padding-top:12px;
+}
+div.column .batch span {
+    color:#ccc;
+}
+div.column .batch a {
+	color:#49539f;
+	text-decoration:none;
+}
+div.column .batch strong {
+    font-weight:bold;
+	font-size:110%;
+	color:#333;
+}
+/* column listing */
+div.columnlisting {
+	border:#ccc 1px solid;
+	margin-top:12px;
+}
