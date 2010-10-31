@@ -1,13 +1,16 @@
-from bda.bfg.tile import tile
-from bda.bfg.app.browser.layout import ProtectedContentTile
+from bda.bfg.tile import (
+    tile,
+    Tile,
+)
 from bda.bfg.ugm.model.users import Users
 
-@tile('leftcolumn', 'templates/column.pt', interface=Users,
-      permission='login', strict=False)
-class UsersLeftColumn(ProtectedContentTile):
-    pass
+@tile('leftcolumn', 'templates/left_column.pt', interface=Users,
+      permission='login')
+class UsersLeftColumn(Tile):
+    
+    add_label = u"Add User"
 
-@tile('rightcolumn', 'templates/column.pt', interface=Users,
-      permission='login', strict=False)
-class UsersRightColumn(ProtectedContentTile):
+@tile('rightcolumn', 'templates/right_column.pt', interface=Users,
+      permission='login')
+class UsersRightColumn(Tile):
     pass

@@ -1,0 +1,15 @@
+<div class="column box">
+  
+  <form action="">
+    <input type="submit" name="add" value="${context.add_label}" />
+  </form>
+  
+  <div class="column_filter">
+    <input type="text" name="column_filter" value="filter listing" />
+  </div>
+  
+  <tal:batch replace="structure tile('columnbatch')" />
+  
+  <tal:listing replace="structure tile('columnlisting')" />
+  
+</div>

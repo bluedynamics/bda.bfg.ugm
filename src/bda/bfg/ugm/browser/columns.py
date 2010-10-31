@@ -1,5 +1,6 @@
 from bda.bfg.tile import (
     tile,
+    Tile,
     registerTile,
     render_tile,
 )
@@ -16,8 +17,7 @@ registerTile('content',
              'bda.bfg.ugm:browser/templates/columns.pt',
              interface=Ugm,
              class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
+             permission='login')
 
 registerTile('content',
              'bda.bfg.ugm:browser/templates/columns.pt',
@@ -30,25 +30,24 @@ registerTile('content',
              'bda.bfg.ugm:browser/templates/columns.pt',
              interface=Groups,
              class_=ProtectedContentTile,
-             permission='login',
-             strict=False)
+             permission='login',)
 
 ###############################################################################
 # Columns for Root. They proxy columns for Users as default.
 ###############################################################################
 
-class RootColumn(ProtectedContentTile):
+class RootColumn(Tile):
     
     def _render(self, name):
         return render_tile(self.model['users'], self.request, name)
 
-@tile('leftcolumn', interface=Ugm, permission='login', strict=False)
+@tile('leftcolumn', interface=Ugm, permission='login')
 class RootLeftColumn(RootColumn):
     
     def render(self):
         return self._render('leftcolumn')
 
-@tile('rightcolumn', interface=Ugm, permission='login', strict=False)
+@tile('rightcolumn', interface=Ugm, permission='login')
 class RootRightColumn(RootColumn):
     
     def render(self):
