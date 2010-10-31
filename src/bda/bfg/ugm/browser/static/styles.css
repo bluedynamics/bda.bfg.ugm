@@ -30,8 +30,7 @@ form .field div.error {
 #header {
 	position:relative;
 	height:60px;
-	/*background-color:#23de10;*/
-	background-color:#00fc00;
+	background-color:#23de10;
 }
 h1#logo {
 	position:absolute;
@@ -106,13 +105,14 @@ div.box,
 #form-addform,
 #form-editform {
 	background: url('/bda.bfg.ugm.static/box.gif') top left no-repeat;
-	padding:30px;
+	padding:12px;
 }
 /* columns */
 div.columns div.column {
 	float:left;
 }
 div.column {
+	width:500px;
 	min-width:500px;
 }
 /* add button */
