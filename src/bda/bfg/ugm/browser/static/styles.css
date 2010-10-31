@@ -148,9 +148,6 @@ div.columnlisting {
 	margin-top:12px;
 	overflow-y:scroll;
 }
-div.left_column div.columnlisting {
-    height:400px;
-}
 div.columnlisting ul {
 	margin:0;
 	padding:0;
@@ -171,4 +168,27 @@ div.columnlisting div.right {
 	float:right;
 	overflow:hidden;
 	padding:2px;
+}
+/* left column */
+div.left_column div.columnlisting {
+    height:400px;
+}
+/* right column */
+div.right_column #form-addform,
+div.right_column #form-editform {
+    background:none;
+    padding:0px;
+}
+div.right_column div.field {
+	width:300px;
+	clear:both;
+	padding-bottom:24px;
+}
+div.right_column div.field label {
+	float:left;
+	font-size:90%;
+}
+div.right_column div.field input {
+    float:right;
+	font-size:90%;
 }

@@ -1,5 +1,6 @@
 <div class="column right_column box">
   
-  Right Column
+  <!-- XXX: let context render editform tile - other model required -->
+  <tal:batch replace="structure tile('editform')" />
   
 </div>
