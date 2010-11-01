@@ -2,9 +2,19 @@ from yafowil.base import factory
 from bda.bfg.tile import tile
 from bda.bfg.app.browser.layout import ProtectedContentTile
 from bda.bfg.app.browser.form import EditForm
-from bda.bfg.ugm.model.settings import Settings
+from bda.bfg.ugm.model.interfaces import ISettings
 
-@tile('editform', interface=Settings, permission="view")
+@tile('content', 'templates/settings.pt', interface=ISettings,
+      permission='login', strict=False)
+class Settings(ProtectedContentTile):
+    
+    @property
+    def ldap_status(self):
+        # XXX
+        return 'OK'
+        #return 'Failed'
+
+@tile('editform', interface=ISettings, permission="view")
 class LDAPSettingsForm(EditForm):
     
     @property
@@ -83,13 +93,3 @@ class LDAPSettingsForm(EditForm):
         self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
         self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
         self.model()
-
-@tile('content', 'templates/settings.pt', interface=Settings,
-      permission='login', strict=False)
-class Settings(ProtectedContentTile):
-    
-    @property
-    def ldap_status(self):
-        # XXX
-        return 'OK'
-        #return 'Failed'

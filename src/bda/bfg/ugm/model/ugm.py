@@ -1,16 +1,18 @@
 from odict import odict
+from zope.interface import implements
 from bda.bfg.app.model import (
     FactoryNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import IUgm
 from bda.bfg.ugm.model.users import Users
 from bda.bfg.ugm.model.groups import Groups
 from bda.bfg.ugm.model.settings import Settings
 
 class Ugm(FactoryNode):
-    """Root Node.
-    """
+    
+    implements(IUgm)
     
     factories = odict((
         ('users', Users),

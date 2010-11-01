@@ -1,10 +1,14 @@
+from zope.interface import implements
 from bda.bfg.app.model import (
     AdapterNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import IUser
 
 class User(AdapterNode):
+    
+    implements(IUser)
     
     @property
     def properties(self):

@@ -5,32 +5,30 @@ from bda.bfg.tile import (
 )
 from bda.bfg.app.browser.utils import make_url
 from bda.bfg.app.browser.form import EditForm
-from bda.bfg.ugm.model.user import User
+from bda.bfg.ugm.model.interfaces import IUser
 from.bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
 
-@tile('leftcolumn', 'templates/left_column.pt',
-      interface=User, permission='view')
+@tile('leftcolumn', interface=IUser, permission='view')
 class UserLeftColumn(Column):
     
     add_label = u"Add User"
     
     def render(self):
-        import pdb;pdb.set_trace()
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
-      interface=User, permission='view')
+      interface=IUser, permission='view')
 class UserRightColumn(Tile):
     pass
 
-@tile('columnbatch', interface=User, permission='view')
+@tile('columnbatch', interface=IUser, permission='view')
 class UserColumnBatch(ColumnBatch):
     pass
 
 @tile('columnlisting', 'templates/column_listing.pt',
-      interface=User, permission='view')
+      interface=IUser, permission='view')
 class UserColumnListing(ColumnListing):
     
     @property
@@ -46,7 +44,7 @@ class UserColumnListing(ColumnListing):
             })
         return ret
 
-@tile('editform', interface=User, permission="view")
+@tile('editform', interface=IUser, permission="view")
 class UserEditForm(EditForm):
     
     @property

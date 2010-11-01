@@ -1,13 +1,15 @@
+from zope.interface import implements
 from bda.bfg.app.model import (
     BaseNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import IUsers
 from bda.bfg.ugm.model.user import User
 
 class Users(BaseNode):
-    """Users Node.
-    """
+    
+    implements(IUsers)
     
     @property
     def metadata(self):

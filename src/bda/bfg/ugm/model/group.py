@@ -1,10 +1,14 @@
+from zope.interface import implements
 from bda.bfg.app.model import (
     AdapterNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import IGroup
 
 class Group(AdapterNode):
+    
+    implements(IGroup)
     
     @property
     def properties(self):

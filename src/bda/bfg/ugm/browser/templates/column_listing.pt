@@ -1,5 +1,7 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
+  
   <div class="columnlisting">
+    
     <ul>
       <tal:item repeat="item context.items">
         <li ajax:target="${item['target']}">
@@ -13,5 +15,6 @@
         </li>
       </tal:item>
     </ul>
+  
   </div>
 </tal:ajax>

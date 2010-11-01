@@ -1,4 +1,5 @@
 import os
+from zope.interface import implements
 from repoze.bfg.security import (
     Everyone,
     Allow,
@@ -11,9 +12,13 @@ from bda.bfg.app.model import (
     ConfigProperties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import ISettings
 from bda.bfg.ugm.model.utils import APP_PATH
 
 class Settings(BaseNode):
+    
+    implements(ISettings)
+    
     __acl__ = [
         (Allow, 'group:manager', 'view'),
         (Allow, Everyone, 'login'),

@@ -1,13 +1,15 @@
+from zope.interface import implements
 from bda.bfg.app.model import (
     BaseNode,
     Properties,
     BaseMetadata,
 )
+from bda.bfg.ugm.model.interfaces import IGroups
 from bda.bfg.ugm.model.group import Group
 
 class Groups(BaseNode):
-    """Groups Node.
-    """
+    
+    implements(IGroups)
     
     @property
     def metadata(self):

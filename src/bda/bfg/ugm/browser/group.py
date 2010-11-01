@@ -5,12 +5,12 @@ from bda.bfg.tile import (
 )
 from bda.bfg.app.browser.utils import make_url
 from bda.bfg.app.browser.form import EditForm
-from bda.bfg.ugm.model.group import Group
+from bda.bfg.ugm.model.interfaces import IGroup
 from.bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
 
-@tile('leftcolumn', interface=Group, permission='view')
+@tile('leftcolumn', interface=IGroup, permission='view')
 class GroupLeftColumn(Column):
     
     add_label = u"Add Group"
@@ -19,16 +19,16 @@ class GroupLeftColumn(Column):
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
-      interface=Group, permission='view')
+      interface=IGroup, permission='view')
 class GroupRightColumn(Tile):
     pass
 
-@tile('columnbatch', interface=Group, permission='view')
+@tile('columnbatch', interface=IGroup, permission='view')
 class GroupColumnBatch(ColumnBatch):
     pass
 
 @tile('columnlisting', 'templates/column_listing.pt',
-      interface=Group, permission='view')
+      interface=IGroup, permission='view')
 class GroupColumnListing(ColumnListing):
     
     @property
@@ -44,7 +44,7 @@ class GroupColumnListing(ColumnListing):
             })
         return ret
 
-@tile('editform', interface=Group, permission="view")
+@tile('editform', interface=IGroup, permission="view")
 class GroupEditForm(EditForm):
     
     @property
