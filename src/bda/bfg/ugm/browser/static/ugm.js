@@ -3,8 +3,10 @@
 	$(document).ready(function() {
 		ugm.left_listing_nav_binder();
 		ugm.right_listing_nav_binder();
+		ugm.listing_filter_binder();
 		bdajax.binders.left_listing_nav_binder = ugm.left_listing_nav_binder;
 		bdajax.binders.right_listing_nav_binder = ugm.right_listing_nav_binder;
+		bdajax.binders.listing_filter_binder = ugm.listing_filter_binder;
     });
 	
 	ugm = {
@@ -21,6 +23,33 @@
             var sel = $('div.right_column div.li_trigger', context);
             sel.unbind();
             sel.bind('click', ugm.right_listing_nav_cb);
+        },
+		
+		// bind listing filter
+        listing_filter_binder: function(context) {
+            
+			// reset filter input field
+            $('div.column_filter input', context).bind('focus', function() {
+                this.value = '';
+                $(this).css('color', '#000');
+            });
+            
+            // refresh focused column with filtered listing
+            $('div.column_filter input', context).bind('keyup', function() {
+				var current_filter = this.value.toLowerCase();
+				$('div.columnlisting li', $(this).parent().parent())
+				    .each(function() {
+						var li = $(this);
+						var leftval = $('div.left', li).html().toLowerCase();
+						var rightval = $('div.middle', li).html().toLowerCase();
+						if (leftval.indexOf(current_filter) != -1
+						  || rightval.indexOf(current_filter) != -1) {
+						    li.removeClass('hidden');  	
+						} else {
+							li.addClass('hidden');    
+						}
+				    });
+            });
         },
 		
 		// left listing trigger callback
