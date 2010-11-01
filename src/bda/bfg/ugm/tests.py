@@ -9,9 +9,11 @@ optionflags = doctest.NORMALIZE_WHITESPACE | \
 
 TESTFILES = [
     'model/root.txt',
-    'model/users.txt',
-    'model/groups.txt',
     'model/setting.txt',
+    'model/users.txt',
+    'model/user.txt',
+    'model/groups.txt',
+    'model/group.txt',
 ]
 
 def test_suite():

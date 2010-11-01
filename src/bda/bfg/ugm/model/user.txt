@@ -1,0 +1,29 @@
+User Adapter Application Node
+=============================
+
+    >>> from bda.bfg.ugm.model.users import Users
+    >>> users = Users()
+    >>> user = users['foo']
+    >>> user
+    <User object 'foo' at ...>
+
+Check Properties.
+::
+
+    >>> props = user.properties
+
+User object is editable.
+::
+
+    >>> props.editable
+    True
+
+Check Metadata.
+::
+
+    >>> md = user.metadata
+    >>> md.title
+    'User'
+    
+    >>> md.description
+    'User'

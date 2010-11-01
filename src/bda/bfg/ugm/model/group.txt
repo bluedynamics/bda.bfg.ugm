@@ -1,0 +1,29 @@
+Group Adapter Application Node
+=======================
+
+    >>> from bda.bfg.ugm.model.groups import Groups
+    >>> groups = Groups()
+    >>> group = groups['foo']
+    >>> group
+    <Group object 'foo' at ...>
+
+Check Properties.
+::
+
+    >>> props = group.properties
+
+Group object is editable.
+::
+
+    >>> props.editable
+    True
+
+Check Metadata.
+::
+
+    >>> md = group.metadata
+    >>> md.title
+    'Group'
+    
+    >>> md.description
+    'Group'
