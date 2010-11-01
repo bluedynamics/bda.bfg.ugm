@@ -17,7 +17,7 @@ class ColumnBatch(Batch):
         ret = list()
         for char in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
                      'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                     'Y', 'X', 'Y', 'Z']:
+                     'Y', 'X', 'Y', 'Z', 5 * '&nbsp;' + 'ALL']:
             ret.append({
                 'page': char,
                 'current': False,

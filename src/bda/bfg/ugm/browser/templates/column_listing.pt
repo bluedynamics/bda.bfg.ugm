@@ -3,9 +3,9 @@
     <ul>
       <tal:item repeat="item context.items">
         <li ajax:target="${item['target']}">
-          <div class="trigger left"
+          <div class="left li_trigger"
                tal:content="item['left']">left</div>
-          <div class="trigger middle"
+          <div class="middle li_trigger"
                tal:content="item['right']">right</div>
           <div class="right">
             actions goes here

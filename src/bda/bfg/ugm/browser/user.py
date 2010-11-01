@@ -3,6 +3,7 @@ from bda.bfg.tile import (
     tile,
     Tile,
 )
+from bda.bfg.app.browser.utils import make_url
 from bda.bfg.app.browser.form import EditForm
 from bda.bfg.ugm.model.user import User
 from.bda.bfg.ugm.browser.columns import Column
@@ -16,6 +17,7 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
+        import pdb;pdb.set_trace()
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
@@ -30,7 +32,19 @@ class UserColumnBatch(ColumnBatch):
 @tile('columnlisting', 'templates/column_listing.pt',
       interface=User, permission='view')
 class UserColumnListing(ColumnListing):
-    pass
+    
+    @property
+    def items(self):
+        ret = list()
+        for i in range(10):
+            ret.append({
+                'target': make_url(self.request,
+                                   node=self.model.root['groups'],
+                                   resource=u'group%i' % i),
+                'left': 'User in Group',
+                'right': 'Group %i' % i,
+            })
+        return ret
 
 @tile('editform', interface=User, permission="view")
 class UserEditForm(EditForm):
@@ -66,16 +80,6 @@ class UserEditForm(EditForm):
                 'handler': self.save,
                 'next': self.next,
                 'label': 'Save',
-            })
-        form['cancel'] = factory(
-            'submit',
-            props = {
-                'action': 'cancel',
-                'expression': True,
-                'handler': None,
-                'next': self.next,
-                'label': 'Cancel',
-                'skip': True,
             })
         return form
     

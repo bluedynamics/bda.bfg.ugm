@@ -3,6 +3,7 @@ from bda.bfg.tile import (
     tile,
     Tile,
 )
+from bda.bfg.app.browser.utils import make_url
 from bda.bfg.app.browser.form import EditForm
 from bda.bfg.ugm.model.group import Group
 from.bda.bfg.ugm.browser.columns import Column
@@ -29,7 +30,19 @@ class GroupColumnBatch(ColumnBatch):
 @tile('columnlisting', 'templates/column_listing.pt',
       interface=Group, permission='view')
 class GroupColumnListing(ColumnListing):
-    pass
+    
+    @property
+    def items(self):
+        ret = list()
+        for i in range(10):
+            ret.append({
+                'target': make_url(self.request,
+                                   node=self.model.root['users'],
+                                   resource=u'user%i' % i),
+                'left': 'Group Member',
+                'right': 'User %i' % i,
+            })
+        return ret
 
 @tile('editform', interface=Group, permission="view")
 class GroupEditForm(EditForm):
@@ -53,16 +66,6 @@ class GroupEditForm(EditForm):
                 'handler': self.save,
                 'next': self.next,
                 'label': 'Save',
-            })
-        form['cancel'] = factory(
-            'submit',
-            props = {
-                'action': 'cancel',
-                'expression': True,
-                'handler': None,
-                'next': self.next,
-                'label': 'Cancel',
-                'skip': True,
             })
         return form
     

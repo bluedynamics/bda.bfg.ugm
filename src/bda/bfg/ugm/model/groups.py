@@ -17,7 +17,8 @@ class Groups(BaseNode):
         return metadata
     
     def __iter__(self):
-        yield 'foo'
+        for i in range(10):
+            yield 'group%i' % i
     
     iterkeys = __iter__
     

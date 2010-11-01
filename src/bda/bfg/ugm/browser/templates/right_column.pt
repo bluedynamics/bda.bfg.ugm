@@ -10,8 +10,8 @@
   </div>
   
   <div class="column_limit">
-    <label>Show all</label>
-    <input type="checkbox" name="column_limit" />
+    <label>Related only</label>
+    <input type="checkbox" checked="checked" name="column_limit" />
   </div>
   
   <tal:batch replace="structure tile('columnbatch')" />
