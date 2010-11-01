@@ -1,17 +1,19 @@
-<div class="columnlisting">
-
-  <ul>
-    <tal:item repeat="item context.items">
-      <li>
-        <div class="left"
-             tal:content="item['left']">left</div>
-        <div class="left"
-             tal:content="item['right']">right</div>
-        <div class="right">
-          actions goes here
-        </div>
-      </li>
-    </tal:item>
-  </ul>
-
-</div>
+<tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
+  <div class="columnlisting">
+    <ul>
+      <tal:item repeat="item context.items">
+        <li ajax:bind="click"
+            ajax:action="rightcolumn:.right_column:replace"
+            ajax:target="${item['target']}">
+          <div class="left"
+               tal:content="item['left']">left</div>
+          <div class="left"
+               tal:content="item['right']">right</div>
+          <div class="right">
+            actions goes here
+          </div>
+        </li>
+      </tal:item>
+    </ul>
+  </div>
+</tal:ajax>

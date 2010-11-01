@@ -53,9 +53,3 @@ class ColumnBatch(Batch):
     @property
     def rightellipsis(self):
         return ''
-
-@tile('columnbatch', interface=Users, permission='login')
-class UsersColumnBatch(ColumnBatch): pass
-
-@tile('columnbatch', interface=Groups, permission='login')
-class GroupsColumnBatch(ColumnBatch): pass

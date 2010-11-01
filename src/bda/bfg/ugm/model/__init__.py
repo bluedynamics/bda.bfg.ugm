@@ -1,4 +1,4 @@
-from bda.bfg.ugm.model.root import Ugm
+from bda.bfg.ugm.model.ugm import Ugm
 
 root = Ugm()
 
