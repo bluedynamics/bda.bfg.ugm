@@ -12,7 +12,7 @@ class ColumnListing(Tile):
     def items(self):
         # XXX: nothing senceful yet, dummy code for CSS
         ret = list()
-        for i in range(10):
+        for i in range(20):
             ret.append({
                 'target': make_url(self.request,
                                    node=self.model,

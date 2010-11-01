@@ -7,7 +7,7 @@
             ajax:target="${item['target']}">
           <div class="left"
                tal:content="item['left']">left</div>
-          <div class="left"
+          <div class="middle"
                tal:content="item['right']">right</div>
           <div class="right">
             actions goes here
