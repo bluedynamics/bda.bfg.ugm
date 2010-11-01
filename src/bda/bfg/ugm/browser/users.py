@@ -28,6 +28,10 @@ class UsersColumnBatch(ColumnBatch):
 class UsersColumnListing(ColumnListing):
     
     @property
+    def current_id(self):
+        return self.request.get('_listing_current_id')
+    
+    @property
     def items(self):
         ret = list()
         for i in range(10):
@@ -37,5 +41,6 @@ class UsersColumnListing(ColumnListing):
                                    resource=u'user%i' % i),
                 'left': 'User',
                 'right': '%i' % i,
+                'current': self.current_id == u'user%i' % i and True or False,
             })
         return ret

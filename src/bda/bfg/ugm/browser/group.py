@@ -16,6 +16,7 @@ class GroupLeftColumn(Column):
     add_label = u"Add Group"
     
     def render(self):
+        self.request['_listing_current_id'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
@@ -41,7 +42,9 @@ class GroupColumnListing(ColumnListing):
                                    resource=u'user%i' % i),
                 'left': 'Group Member',
                 'right': 'User %i' % i,
+                'current': False,
             })
+            
         return ret
 
 @tile('editform', interface=IGroup, permission="view")
@@ -54,7 +57,7 @@ class GroupEditForm(EditForm):
                        props={'action': self.nodeurl})
         form['name'] = factory(
             'field:error:label:text',
-            value = 'Gruppe 1',
+            value = self.model.__name__,
             props = {
                 'label': 'Name',
             })

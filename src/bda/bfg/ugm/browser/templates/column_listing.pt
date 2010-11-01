@@ -4,7 +4,8 @@
     
     <ul>
       <tal:item repeat="item context.items">
-        <li ajax:target="${item['target']}">
+        <li ajax:target="${item['target']}"
+            tal:attributes="class item['current'] and 'selected' or None">
           <div class="left li_trigger"
                tal:content="item['left']">left</div>
           <div class="middle li_trigger"

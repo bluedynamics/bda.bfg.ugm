@@ -16,6 +16,7 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
+        self.request['_listing_current_id'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
@@ -41,6 +42,7 @@ class UserColumnListing(ColumnListing):
                                    resource=u'group%i' % i),
                 'left': 'User in Group',
                 'right': 'Group %i' % i,
+                'current': False,
             })
         return ret
 
@@ -54,13 +56,13 @@ class UserEditForm(EditForm):
                        props={'action': self.nodeurl})
         form['name'] = factory(
             'field:error:label:text',
-            value = 'Max Mustermann',
+            value = self.model.__name__,
             props = {
                 'label': 'Name',
             })
         form['email'] = factory(
             'field:error:label:text',
-            value = 'foo@my-domain.com',
+            value = '%s@my-domain.com' % self.model.__name__,
             props = {
                 'label': 'E-Mail',
             })

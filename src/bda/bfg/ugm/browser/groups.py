@@ -28,6 +28,10 @@ class GroupsColumnBatch(ColumnBatch):
 class GroupsColumnListing(ColumnListing):
     
     @property
+    def current_id(self):
+        return self.request.get('_listing_current_id')
+    
+    @property
     def items(self):
         ret = list()
         for i in range(10):
@@ -37,5 +41,6 @@ class GroupsColumnListing(ColumnListing):
                                    resource=u'group%i' % i),
                 'left': 'Group',
                 'right': '%i' % i,
+                'current': self.current_id == u'group%i' % i and True or False,
             })
         return ret
