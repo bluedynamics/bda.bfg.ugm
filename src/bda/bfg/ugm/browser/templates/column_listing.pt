@@ -2,12 +2,10 @@
   <div class="columnlisting">
     <ul>
       <tal:item repeat="item context.items">
-        <li ajax:bind="click"
-            ajax:action="rightcolumn:.right_column:replace"
-            ajax:target="${item['target']}">
-          <div class="left"
+        <li ajax:target="${item['target']}">
+          <div class="trigger left"
                tal:content="item['left']">left</div>
-          <div class="middle"
+          <div class="trigger middle"
                tal:content="item['right']">right</div>
           <div class="right">
             actions goes here

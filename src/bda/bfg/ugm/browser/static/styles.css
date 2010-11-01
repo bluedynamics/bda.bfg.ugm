@@ -160,6 +160,10 @@ div.columnlisting ul {
 div.columnlisting li {
 	clear:both;
 }
+div.columnlisting li.selected div {
+	color:#fff;
+	background-color:#49539f;
+}
 div.columnlisting div.left {
 	float:left;
 	width:162px;
