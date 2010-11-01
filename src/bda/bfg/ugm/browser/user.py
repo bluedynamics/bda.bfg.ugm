@@ -46,7 +46,7 @@ class UserColumnListing(ColumnListing):
             })
         return ret
 
-@tile('editform', interface=IUser, permission="view")
+@tile('editform', interface=IUser, permission="edit")
 class UserEditForm(EditForm):
     
     @property

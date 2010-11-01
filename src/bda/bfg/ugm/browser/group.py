@@ -47,7 +47,7 @@ class GroupColumnListing(ColumnListing):
             
         return ret
 
-@tile('editform', interface=IGroup, permission="view")
+@tile('editform', interface=IGroup, permission="edit")
 class GroupEditForm(EditForm):
     
     @property

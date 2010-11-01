@@ -14,7 +14,7 @@ class Settings(ProtectedContentTile):
         return 'OK'
         #return 'Failed'
 
-@tile('editform', interface=ISettings, permission="view")
+@tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):
     
     @property
