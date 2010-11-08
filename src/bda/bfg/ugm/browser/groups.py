@@ -34,7 +34,7 @@ class GroupsColumnListing(ColumnListing):
     @property
     def items(self):
         ret = list()
-        for i in range(10):
+        for i in range(1000):
             ret.append({
                 'target': make_url(self.request,
                                    node=self.model,
