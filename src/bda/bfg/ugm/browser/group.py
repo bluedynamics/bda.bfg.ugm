@@ -55,7 +55,7 @@ class GroupColumnListing(ColumnListing):
                 'actions': [
                     {
                         'id': 'add_item',
-                        'enabled': True,
+                        'enabled': False,
                         'title': 'Add User to selected Group',
                         'target': action_target,
                     },

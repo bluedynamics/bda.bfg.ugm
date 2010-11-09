@@ -58,15 +58,44 @@
         
         // bind listing item actions
         listing_actions_binder: function(context) {
-            var delete_actions = $('div.actions a.delete_item', context);
+            
+			// bind delete actions
+			var delete_actions = $('div.actions a.delete_item', context);
             delete_actions.unbind();
             delete_actions.bind('click', ugm.actions.delete_item);
-            var add_actions = $('div.actions a.add_item', context);
+			
+			// bind disabled delete actions
+			var delete_disabled = $('div.actions a.delete_item_disabled',
+			                        context);
+			delete_disabled.unbind();
+			delete_disabled.bind('click', function(event) {
+				event.preventDefault();
+			});
+            
+			// bind add actions
+			var add_actions = $('div.actions a.add_item', context);
             add_actions.unbind();
             add_actions.bind('click', ugm.actions.add_item);
-            var remove_actions = $('div.actions a.remove_item', context);
+			
+			// bind disabled add actions
+			var add_disabled = $('div.actions a.add_item_disabled', context);
+			add_disabled.unbind();
+			add_disabled.bind('click', function(event) {
+                event.preventDefault();
+            });
+            
+			// bind remove actions
+			var remove_actions = $('div.actions a.remove_item', context);
             remove_actions.unbind();
             remove_actions.bind('click', ugm.actions.remove_item);
+			
+			// bind disabled remove actions
+			var remove_disabled = $('div.actions a.remove_item_disabled',
+			                        context);
+			remove_disabled.unbind();
+			remove_disabled.bind('click', function(event) {
+                event.preventDefault();
+            });
         },
         
         // object containing ugm action callbacks
@@ -123,6 +152,17 @@
                             bdajax.error(data.message);
                             return;
                         }
+						elem.unbind();
+	                    elem.removeClass('add_item');
+	                    elem.addClass('add_item_disabled');
+						elem.bind('click', function(event) {
+			                event.preventDefault();
+			            });
+						var remove = $('.remove_item_disabled', elem.parent());
+						remove.unbind();
+						remove.removeClass('remove_item_disabled');
+						remove.addClass('remove_item');
+						remove.bind('click', ugm.actions.remove_item);
                     }
                 });
 				ugm.actions.perform(options);
@@ -145,6 +185,17 @@
                             bdajax.error(data.message);
                             return;
                         }
+						elem.unbind();
+                        elem.removeClass('remove_item');
+                        elem.addClass('remove_item_disabled');
+						elem.bind('click', function(event) {
+                            event.preventDefault();
+                        });
+                        var add = $('.add_item_disabled', elem.parent());
+                        add.unbind();
+                        add.removeClass('add_item_disabled');
+                        add.addClass('add_item');
+                        add.bind('click', ugm.actions.add_item);
                     }
                 });
 				ugm.actions.perform(options);
