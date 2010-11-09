@@ -5,21 +5,21 @@
         ugm.right_listing_nav_binder();
         ugm.listing_filter_binder();
         ugm.listing_actions_binder();
-		ugm.listing_related_binder();
+        ugm.listing_related_binder();
         bdajax.binders.left_listing_nav_binder = ugm.left_listing_nav_binder;
         bdajax.binders.right_listing_nav_binder = ugm.right_listing_nav_binder;
         bdajax.binders.listing_filter_binder = ugm.listing_filter_binder;
         bdajax.binders.listing_actions_binder = ugm.listing_actions_binder;
-		bdajax.binders.listing_related_binder = ugm.listing_related_binder;
+        bdajax.binders.listing_related_binder = ugm.listing_related_binder;
     });
     
     ugm = {
         
         // bind left listing trigger
         left_listing_nav_binder: function(context) {
-            var sel = $('ul.leftlisting div.li_trigger', context);
-            sel.unbind();
-            sel.bind('click', ugm.left_listing_nav_cb);
+            $('ul.leftlisting div.li_trigger', context)
+                .unbind()
+                .bind('click', ugm.left_listing_nav_cb);
         },
         
         // left listing trigger callback
@@ -41,9 +41,9 @@
         
         // bind right listing trigger
         right_listing_nav_binder: function(context) {
-			var sel = $('ul.rightlisting div.li_trigger', context);
-            sel.unbind();
-            sel.bind('click', ugm.right_listing_nav_cb);
+            $('ul.rightlisting div.li_trigger', context)
+                .unbind()
+                .bind('click', ugm.right_listing_nav_cb);
         },
         
         // right listing trigger callback
@@ -61,43 +61,41 @@
         // bind listing item actions
         listing_actions_binder: function(context) {
             
-			// bind delete actions
-			var delete_actions = $('div.actions a.delete_item', context);
-            delete_actions.unbind();
-            delete_actions.bind('click', ugm.actions.delete_item);
-			
-			// bind disabled delete actions
-			var delete_disabled = $('div.actions a.delete_item_disabled',
-			                        context);
-			delete_disabled.unbind();
-			delete_disabled.bind('click', function(event) {
-				event.preventDefault();
-			});
+            // bind delete actions
+            $('div.actions a.delete_item', context)
+                .unbind()
+                .bind('click', ugm.actions.delete_item);
             
-			// bind add actions
-			var add_actions = $('div.actions a.add_item', context);
-            add_actions.unbind();
-            add_actions.bind('click', ugm.actions.add_item);
-			
-			// bind disabled add actions
-			var add_disabled = $('div.actions a.add_item_disabled', context);
-			add_disabled.unbind();
-			add_disabled.bind('click', function(event) {
-                event.preventDefault();
-            });
+            // bind disabled delete actions
+            $('div.actions a.delete_item_disabled', context)
+                .unbind()
+                .bind('click', function(event) {
+                    event.preventDefault();
+                });
             
-			// bind remove actions
-			var remove_actions = $('div.actions a.remove_item', context);
-            remove_actions.unbind();
-            remove_actions.bind('click', ugm.actions.remove_item);
-			
-			// bind disabled remove actions
-			var remove_disabled = $('div.actions a.remove_item_disabled',
-			                        context);
-			remove_disabled.unbind();
-			remove_disabled.bind('click', function(event) {
-                event.preventDefault();
-            });
+            // bind add actions
+            $('div.actions a.add_item', context)
+                .unbind()
+                .bind('click', ugm.actions.add_item);
+            
+            // bind disabled add actions
+            $('div.actions a.add_item_disabled', context)
+                .unbind()
+                .bind('click', function(event) {
+                    event.preventDefault();
+                });
+            
+            // bind remove actions
+            $('div.actions a.remove_item', context)
+                .unbind()
+                .bind('click', ugm.actions.remove_item);
+            
+            // bind disabled remove actions
+            $('div.actions a.remove_item_disabled', context)
+                .unbind()
+                .bind('click', function(event) {
+                    event.preventDefault();
+                });
         },
         
         // object containing ugm action callbacks
@@ -117,11 +115,11 @@
                     success: function(data) {
                         if (!data) {
                             bdajax.error('Empty response');
-							return;
+                            return;
                         }
                         if (!data.success) {
                             bdajax.error(data.message);
-							return;
+                            return;
                         }
                         var li = elem.parent().parent();
                         if (li.hasClass('selected')) {
@@ -140,11 +138,11 @@
             // add item as member
             add_item: function(event) {
                 event.preventDefault();
-				var elem = $(event.currentTarget);
+                var elem = $(event.currentTarget);
                 var target = elem.attr('ajax:target');
-				var options = bdajax.parsetarget(target);
-				$.extend(options, {
-					action_id: 'add_item',
+                var options = bdajax.parsetarget(target);
+                $.extend(options, {
+                    action_id: 'add_item',
                     success: function(data) {
                         if (!data) {
                             bdajax.error('Empty response');
@@ -154,30 +152,30 @@
                             bdajax.error(data.message);
                             return;
                         }
-						elem.unbind();
-	                    elem.removeClass('add_item');
-	                    elem.addClass('add_item_disabled');
-						elem.bind('click', function(event) {
-			                event.preventDefault();
-			            });
-						var remove = $('.remove_item_disabled', elem.parent());
-						remove.unbind();
-						remove.removeClass('remove_item_disabled');
-						remove.addClass('remove_item');
-						remove.bind('click', ugm.actions.remove_item);
+                        elem.unbind()
+                            .removeClass('add_item')
+                            .addClass('add_item_disabled')
+                            .bind('click', function(event) {
+                                event.preventDefault();
+                            });
+                        $('.remove_item_disabled', elem.parent())
+                            .unbind()
+                            .removeClass('remove_item_disabled')
+                            .addClass('remove_item')
+                            .bind('click', ugm.actions.remove_item);
                     }
                 });
-				ugm.actions.perform(options);
+                ugm.actions.perform(options);
             },
             
             // remove item from member
             remove_item: function(event) {
                 event.preventDefault();
-				var elem = $(event.currentTarget);
+                var elem = $(event.currentTarget);
                 var target = elem.attr('ajax:target');
-				var options = bdajax.parsetarget(target);
-				$.extend(options, {
-					action_id: 'remove_item',
+                var options = bdajax.parsetarget(target);
+                $.extend(options, {
+                    action_id: 'remove_item',
                     success: function(data) {
                         if (!data) {
                             bdajax.error('Empty response');
@@ -187,20 +185,20 @@
                             bdajax.error(data.message);
                             return;
                         }
-						elem.unbind();
-                        elem.removeClass('remove_item');
-                        elem.addClass('remove_item_disabled');
-						elem.bind('click', function(event) {
-                            event.preventDefault();
-                        });
-                        var add = $('.add_item_disabled', elem.parent());
-                        add.unbind();
-                        add.removeClass('add_item_disabled');
-                        add.addClass('add_item');
-                        add.bind('click', ugm.actions.add_item);
+                        elem.unbind()
+                            .removeClass('remove_item')
+                            .addClass('remove_item_disabled')
+                            .bind('click', function(event) {
+                                event.preventDefault();
+                            });
+                        $('.add_item_disabled', elem.parent())
+                            .unbind()
+                            .removeClass('add_item_disabled')
+                            .addClass('add_item')
+                            .bind('click', ugm.actions.add_item);
                     }
                 });
-				ugm.actions.perform(options);
+                ugm.actions.perform(options);
             },
             
             // perform listing item action
@@ -244,24 +242,24 @@
             $('li', li.parent()).removeClass('selected');
             li.addClass('selected');
         },
-		
-		// bind related items filter
-		listing_related_binder: function(context) {
-			var sel = $('#related_filter', context);
-            sel.unbind();
-            sel.bind('click', ugm.listing_related_cb);
-		},
-		
-		// callback when related filter gets toggled
-		listing_related_cb: function(event) {
-			var elem = $(this);
-			var action;
-			if (elem.attr('checked')) {
-				action = 'columnlisting';
-			} else {
-				action = 'allcolumnlisting';
-			}
-			var target = bdajax.parsetarget(elem.attr('ajax:target'));
+        
+        // bind related items filter
+        listing_related_binder: function(context) {
+            $('#related_filter', context)
+                .unbind()
+                .bind('click', ugm.listing_related_cb);
+        },
+        
+        // callback when related filter gets toggled
+        listing_related_cb: function(event) {
+            var elem = $(this);
+            var action;
+            if (elem.attr('checked')) {
+                action = 'columnlisting';
+            } else {
+                action = 'allcolumnlisting';
+            }
+            var target = bdajax.parsetarget(elem.attr('ajax:target'));
             bdajax.action({
                 name: action,
                 selector: 'div.right_column .columnlisting',
@@ -269,7 +267,7 @@
                 url: target.url,
                 params: target.params
             });
-		}
+        }
     };
     
 })(jQuery);
