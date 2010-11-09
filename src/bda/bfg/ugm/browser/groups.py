@@ -35,10 +35,11 @@ class GroupsColumnListing(ColumnListing):
     def items(self):
         ret = list()
         for i in range(1000):
+            target = make_url(self.request,
+                              node=self.model,
+                              resource=u'group%i' % i)
             ret.append({
-                'target': make_url(self.request,
-                                   node=self.model,
-                                   resource=u'group%i' % i),
+                'target': target,
                 'head': 'Group %i' % i,
                 'current': self.current_id == u'group%i' % i and True or False,
                 'actions': [
@@ -46,6 +47,7 @@ class GroupsColumnListing(ColumnListing):
                         'id': 'delete_item',
                         'enabled': True,
                         'title': 'Delete Group',
+                        'target': target,
                     }
                 ],
             })

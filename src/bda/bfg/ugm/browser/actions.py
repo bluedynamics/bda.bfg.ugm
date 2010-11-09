@@ -1,7 +1,5 @@
 from repoze.bfg.view import bfg_view
-from bda.bfg.ugm.model.interfaces import IUsers
 from bda.bfg.ugm.model.interfaces import IUser
-from bda.bfg.ugm.model.interfaces import IGroups
 from bda.bfg.ugm.model.interfaces import IGroup
 
 class Action(object):
@@ -13,96 +11,105 @@ class Action(object):
     @bfg_view(name='action_id', accept='application/json', renderer='json')
     """
     
-    def __call__(self, model, request):
+    def __init__(self, model, request):
+        self.model = model
+        self.request = request
+    
+    def __call__(self):
         """Perform this action and return JSON response.
+        
+        Returns a dict with success flag and return message:
+            {
+                'success': True,
+                'message': 'Return message',
+            }
         """
         raise NotImplementedError(u"Abstract action does not implement "
                                   u"``__call__``.")
 
 ###############################################################################
-# Actions for IUsers application node
-###############################################################################
-
-@bfg_view(name='delete_item', accept='application/json',
-          renderer='json', context=IUsers, permission="view")
-class DeleteUserAction(Action):
-    
-    def __call__(self, model, request):
-        """Delete user from database.
-        """
-        return {
-            'success': True,
-            'msg': 'Deleted user from database',
-        }
-
-###############################################################################
-# Actions for IGroups application node
-###############################################################################
-
-@bfg_view(name='delete_item', accept='application/json',
-          renderer='json', context=IGroups, permission="view")
-class DeleteGroupAction(Action):
-    
-    def __call__(self, model, request):
-        """Delete group from database.
-        """
-        return {
-            'success': True,
-            'msg': 'Deleted group from database',
-        }
-
-###############################################################################
 # Actions for IUser application node
 ###############################################################################
+
+@bfg_view(name='delete_item', accept='application/json',
+          renderer='json', context=IUser, permission="view")
+class DeleteUserAction(Action):
+    
+    def __call__(self):
+        """Delete user from database.
+        """
+        #parent = self.model.__parent__
+        #del parent[self.model.__name__]
+        #parent()
+        return {
+            'success': True,
+            'message': 'Deleted user from database',
+        }
 
 @bfg_view(name='add_item', accept='application/json',
           renderer='json', context=IUser, permission="view")
 class UserAddToGroupAction(Action):
     
-    def __call__(self, model, request):
+    def __call__(self):
         """Add user to group.
         """
+        print 'add item user'
         return {
             'success': True,
-            'msg': 'Added user to group',
+            'message': 'Added user to group',
         }
 
 @bfg_view(name='remove_item', accept='application/json',
           renderer='json', context=IUser, permission="view")
 class UserRemoveFromGroupAction(Action):
     
-    def __call__(self, model, request):
+    def __call__(self):
         """Remove user from group.
         """
+        print 'remove item user'
         return {
             'success': True,
-            'msg': 'Removed User from Group',
+            'message': 'Removed User from Group',
         }
 
 ###############################################################################
 # Actions for IGroup application node
 ###############################################################################
 
+@bfg_view(name='delete_item', accept='application/json',
+          renderer='json', context=IGroup, permission="view")
+class DeleteGroupAction(Action):
+    
+    def __call__(self):
+        """Delete group from database.
+        """
+        return {
+            'success': True,
+            'message': 'Deleted group from database',
+        }
+
 @bfg_view(name='add_item', accept='application/json',
           renderer='json', context=IGroup, permission="view")
 class GroupAddUserAction(Action):
     
-    def __call__(self, model, request):
+    def __call__(self):
         """Add user to group.
         """
+        print 'add item group'
         return {
             'success': True,
-            'msg': 'Added user to group',
+            'message': 'Added user to group',
         }
 
 @bfg_view(name='remove_item', accept='application/json',
           renderer='json', context=IGroup, permission="view")
 class GroupRemoveUserAction(Action):
     
-    def __call__(self, model, request):
+    def __call__(self):
         """Remove user from group.
         """
+        print 'remove item group'
         return {
             'success': True,
-            'msg': 'Removed user from group',
+            'message': 'Removed user from group',
         }

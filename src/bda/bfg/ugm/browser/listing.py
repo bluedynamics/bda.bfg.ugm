@@ -19,6 +19,7 @@ class ColumnListing(Tile):
                     'id': 'action_id',
                     'enabled': True,
                     'title': 'Action Title',
+                    'target': u'http://example.com/foo',
                 }
             ],
         }

@@ -13,7 +13,8 @@
               <tal:enabled condition="action['enabled']">
                 <a href=""
                    title="${action['title']}"
-                   class="${'action %s enabled' % action['id']}">&nbsp;</a>
+                   class="${'action %s enabled' % action['id']}"
+                   ajax:target="${action['target']}">&nbsp;</a>
               </tal:enabled>
               <tal:disabled condition="not action['enabled']">
                 <a href=""

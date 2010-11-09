@@ -47,11 +47,13 @@ class UserColumnListing(ColumnListing):
                         'id': 'add_item',
                         'enabled': True,
                         'title': 'Add selected User to Group',
+                        'target': u'',
                     },
                     {
                         'id': 'remove_item',
                         'enabled': True,
                         'title': 'Remove selected User from Group',
+                        'target': u'',
                     },
                 ],
             })

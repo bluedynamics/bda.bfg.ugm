@@ -59,13 +59,13 @@
 		// bind listing item actions
         listing_actions_binder: function(context) {
             var delete_actions = $('div.actions a.delete_item', context);
-			var add_actions = $('div.actions a.add_item', context);
-			var remove_actions = $('div.actions a.remove_item', context);
 			delete_actions.unbind();
-			add_actions.unbind();
-			remove_actions.unbind();
 			delete_actions.bind('click', ugm.actions.delete_item);
+			var add_actions = $('div.actions a.add_item', context);
+			add_actions.unbind();
 			add_actions.bind('click', ugm.actions.add_item);
+			var remove_actions = $('div.actions a.remove_item', context);
+			remove_actions.unbind();
 			remove_actions.bind('click', ugm.actions.remove_item);
         },
 		
@@ -75,9 +75,14 @@
 			// delete item from database
 			delete_item: function(event) {
 				event.preventDefault();
-				var message = 'Do you really want to delete this item?'
-				bdajax.dialog(message, function() {
-					alert('delete now');
+				var options = {
+					message: 'Do you really want to delete this item?',
+					action_id: 'delete_item'
+				};
+				var target = $(event.currentTarget).attr('ajax:target');
+				$.extend(options, bdajax.parsetarget(target));
+				bdajax.dialog(options, function(options) {
+					ugm.actions.perform(options);
 				});
 			},
 			
@@ -89,12 +94,24 @@
 			// remove item from member
 			remove_item: function(event) {
                 event.preventDefault();
-            }
-		},
-		
-		// listing actions trigger callback
-		listing_actions_cb: function(event) {
-			event.preventDefault();
+            },
+			
+			// perform listing item action
+			perform: function(config) {
+				bdajax.request({
+		            url: bdajax.parseurl(config.url) + '/' + config.action_id,
+		            type: 'json',
+		            params: config.params,
+		            success: function(data) {
+		                if (!data) {
+		                    bdajax.error('Empty response');
+		                }
+		                var success = data.success;
+		                var message = data.message;
+		                alert(success + ' - ' + message);
+		            }
+		        });
+			}
 		},
 		
 		// bind listing filter
