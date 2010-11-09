@@ -79,8 +79,26 @@
 					message: 'Do you really want to delete this item?',
 					action_id: 'delete_item'
 				};
-				var target = $(event.currentTarget).attr('ajax:target');
+				var elem = $(event.currentTarget);
+				var target = elem.attr('ajax:target');
 				$.extend(options, bdajax.parsetarget(target));
+				$.extend(options, {
+					success: function(data) {
+						if (!data) {
+                            bdajax.error('Empty response');
+                        }
+                        if (!data.success) {
+                            bdajax.error(data.message);
+                        }
+						var li = elem.parent().parent();
+						if (li.hasClass('selected')) {
+							var col = $('div.right_column');
+							col.removeClass('box');
+							col.empty();
+						}
+                        li.remove();
+					}
+				});
 				bdajax.dialog(options, function(options) {
 					ugm.actions.perform(options);
 				});
@@ -102,14 +120,7 @@
 		            url: bdajax.parseurl(config.url) + '/' + config.action_id,
 		            type: 'json',
 		            params: config.params,
-		            success: function(data) {
-		                if (!data) {
-		                    bdajax.error('Empty response');
-		                }
-		                var success = data.success;
-		                var message = data.message;
-		                alert(success + ' - ' + message);
-		            }
+		            success: config.success
 		        });
 			}
 		},
