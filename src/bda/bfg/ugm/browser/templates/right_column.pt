@@ -1,23 +1,29 @@
-<div class="column right_column box">
+<tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
+  <div class="column right_column box">
+    
+    <!-- XXX: let context render editform tile - other model required -->
+    <tal:batch replace="structure tile('editform')" />
+    
+    <hr />
+    
+    <div class="column_filter">
+      <input type="text" name="column_filter" value="filter listing" />
+    </div>
+    
+    <div class="column_limit">
+      <label>Related only</label>
+      <input id="related_filter"
+             type="checkbox"
+             checked="checked"
+             name="column_limit"
+             ajax:target="${context.nodeurl}" />
+    </div>
+    
+    <div class="clear"></div>
+    
+    <tal:batch condition="None" replace="structure tile('columnbatch')" />
+    
+    <tal:listing replace="structure tile('columnlisting')" />
   
-  <!-- XXX: let context render editform tile - other model required -->
-  <tal:batch replace="structure tile('editform')" />
-  
-  <hr />
-  
-  <div class="column_filter">
-    <input type="text" name="column_filter" value="filter listing" />
   </div>
-  
-  <div class="column_limit">
-    <label>Related only</label>
-    <input type="checkbox" checked="checked" name="column_limit" />
-  </div>
-  
-  <div class="clear"></div>
-  
-  <tal:batch condition="None" replace="structure tile('columnbatch')" />
-  
-  <tal:listing replace="structure tile('columnlisting')" />
-  
-</div>
+</tal:ajax>

@@ -5,10 +5,12 @@
         ugm.right_listing_nav_binder();
         ugm.listing_filter_binder();
         ugm.listing_actions_binder();
+		ugm.listing_related_binder();
         bdajax.binders.left_listing_nav_binder = ugm.left_listing_nav_binder;
         bdajax.binders.right_listing_nav_binder = ugm.right_listing_nav_binder;
         bdajax.binders.listing_filter_binder = ugm.listing_filter_binder;
         bdajax.binders.listing_actions_binder = ugm.listing_actions_binder;
+		bdajax.binders.listing_related_binder = ugm.listing_related_binder;
     });
     
     ugm = {
@@ -241,7 +243,33 @@
         reset_listing_selected: function(li) {
             $('li', li.parent()).removeClass('selected');
             li.addClass('selected');
-        }
+        },
+		
+		// bind related items filter
+		listing_related_binder: function(context) {
+			var sel = $('#related_filter', context);
+            sel.unbind();
+            sel.bind('click', ugm.listing_related_cb);
+		},
+		
+		// callback when related filter gets toggled
+		listing_related_cb: function(event) {
+			var elem = $(this);
+			var action;
+			if (elem.attr('checked')) {
+				action = 'columnlisting';
+			} else {
+				action = 'allcolumnlisting';
+			}
+			var target = bdajax.parsetarget(elem.attr('ajax:target'));
+            bdajax.action({
+                name: action,
+                selector: 'div.right_column .columnlisting',
+                mode: 'replace',
+                url: target.url,
+                params: target.params
+            });
+		}
     };
     
 })(jQuery);

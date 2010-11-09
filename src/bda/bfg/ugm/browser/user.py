@@ -38,6 +38,44 @@ class UserColumnListing(ColumnListing):
     @property
     def items(self):
         ret = list()
+        return ret
+#        for i in range(10):
+#            item_target = make_url(self.request,
+#                                   node=self.model.root['groups'],
+#                                   resource=u'group%i' % i)
+#            action_query = make_query(id=u'group%i' % i)
+#            action_target = make_url(self.request,
+#                                     node=self.model.root['users'],
+#                                     resource=self.model.__name__,
+#                                     query=action_query)
+#            ret.append({
+#                'target': item_target,
+#                'head': 'User in Group - Group %i' % i,
+#                'current': False,
+#                'actions': [
+#                    {
+#                        'id': 'add_item',
+#                        'enabled': False,
+#                        'title': 'Add selected User to Group',
+#                        'target': action_target,
+#                    },
+#                    {
+#                        'id': 'remove_item',
+#                        'enabled': True,
+#                        'title': 'Remove selected User from Group',
+#                        'target': action_target,
+#                    },
+#                ],
+#            })
+#        return ret
+
+@tile('allcolumnlisting', 'templates/column_listing.pt',
+      interface=IUser, permission='view')
+class AllUserColumnListing(ColumnListing):
+    
+    @property
+    def items(self):
+        ret = list()
         for i in range(10):
             item_target = make_url(self.request,
                                    node=self.model.root['groups'],
