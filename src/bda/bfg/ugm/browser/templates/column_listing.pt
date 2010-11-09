@@ -6,12 +6,21 @@
       <tal:item repeat="item context.items">
         <li ajax:target="${item['target']}"
             tal:attributes="class item['current'] and 'selected' or None">
-          <div class="left li_trigger"
-               tal:content="item['left']">left</div>
-          <div class="middle li_trigger"
-               tal:content="item['right']">right</div>
-          <div class="right">
-            actions goes here
+          <div class="head li_trigger"
+               tal:content="item['head']">head</div>
+          <div class="actions">
+            <tal:action repeat="action item['actions']">
+              <tal:enabled condition="action['enabled']">
+                <a href=""
+                   title="${action['title']}"
+                   class="${'action %s enabled' % action['id']}">&nbsp;</a>
+              </tal:enabled>
+              <tal:disabled condition="not action['enabled']">
+                <a href=""
+                   title="${action['title']}"
+                   class="${'action %s_disabled' % action['id']}">&nbsp;</a>
+              </tal:disabled>
+            </tal:action>
           </div>
         </li>
       </tal:item>

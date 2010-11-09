@@ -19,7 +19,7 @@ class Users(BaseNode):
         return metadata
     
     def __iter__(self):
-        for i in range(10):
+        for i in range(1000):
             yield 'user%i' % i
     
     iterkeys = __iter__

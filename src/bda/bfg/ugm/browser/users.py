@@ -39,8 +39,14 @@ class UsersColumnListing(ColumnListing):
                 'target': make_url(self.request,
                                    node=self.model,
                                    resource=u'user%i' % i),
-                'left': 'User',
-                'right': '%i' % i,
+                'head': 'User - %i' % i,
                 'current': self.current_id == u'user%i' % i and True or False,
+                'actions': [
+                    {
+                        'id': 'delete_item',
+                        'enabled': True,
+                        'title': 'Delete Item',
+                    }
+                ],
             })
         return ret

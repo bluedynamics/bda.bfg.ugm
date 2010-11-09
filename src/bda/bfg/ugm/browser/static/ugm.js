@@ -40,11 +40,9 @@
 				$('div.columnlisting li', $(this).parent().parent())
 				    .each(function() {
 						var li = $(this);
-						var leftval = $('div.left', li).html().toLowerCase();
-						var rightval = $('div.middle', li).html().toLowerCase();
-						if (leftval.indexOf(current_filter) != -1
-						  || rightval.indexOf(current_filter) != -1) {
-						    li.removeClass('hidden');  	
+						var val = $('div.head', li).html().toLowerCase();
+						if (val.indexOf(current_filter) != -1) {
+						    li.removeClass('hidden');
 						} else {
 							li.addClass('hidden');    
 						}

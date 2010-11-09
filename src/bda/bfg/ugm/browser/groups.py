@@ -39,8 +39,14 @@ class GroupsColumnListing(ColumnListing):
                 'target': make_url(self.request,
                                    node=self.model,
                                    resource=u'group%i' % i),
-                'left': 'Group',
-                'right': '%i' % i,
+                'head': 'Group %i' % i,
                 'current': self.current_id == u'group%i' % i and True or False,
+                'actions': [
+                    {
+                        'id': 'delete_item',
+                        'enabled': True,
+                        'title': 'Delete Item',
+                    }
+                ],
             })
         return ret

@@ -40,9 +40,20 @@ class GroupColumnListing(ColumnListing):
                 'target': make_url(self.request,
                                    node=self.model.root['users'],
                                    resource=u'user%i' % i),
-                'left': 'Group Member',
-                'right': 'User %i' % i,
+                'head': 'Group Member - User %i' % i,
                 'current': False,
+                'actions': [
+                    {
+                        'id': 'add_item',
+                        'enabled': True,
+                        'title': 'Add Item',
+                    },
+                    {
+                        'id': 'remove_item',
+                        'enabled': True,
+                        'title': 'Remove Item',
+                    },
+                ],
             })
             
         return ret

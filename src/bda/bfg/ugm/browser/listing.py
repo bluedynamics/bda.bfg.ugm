@@ -12,12 +12,13 @@ class ColumnListing(Tile):
         
         {
             'target': u'http://example.com/foo',
+            'head': u'Head Column content',
             'current': False,
-            'left': u'Left column content',
-            'right': u'middle column content',
             'actions': [
                 {
-                    'XXX': 'XXX',
+                    'id': 'action_id',
+                    'enabled': True,
+                    'title': 'Action Title',
                 }
             ],
         }

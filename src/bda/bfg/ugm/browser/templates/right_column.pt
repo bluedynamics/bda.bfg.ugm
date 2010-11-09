@@ -14,7 +14,9 @@
     <input type="checkbox" checked="checked" name="column_limit" />
   </div>
   
-  <tal:batch replace="structure tile('columnbatch')" />
+  <div class="clear"></div>
+  
+  <tal:batch condition="None" replace="structure tile('columnbatch')" />
   
   <tal:listing replace="structure tile('columnlisting')" />
   
