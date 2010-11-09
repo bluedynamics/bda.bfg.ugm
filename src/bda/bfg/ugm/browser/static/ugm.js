@@ -86,9 +86,11 @@
                     success: function(data) {
                         if (!data) {
                             bdajax.error('Empty response');
+							return;
                         }
                         if (!data.success) {
                             bdajax.error(data.message);
+							return;
                         }
                         var li = elem.parent().parent();
                         if (li.hasClass('selected')) {
@@ -107,11 +109,45 @@
             // add item as member
             add_item: function(event) {
                 event.preventDefault();
+				var elem = $(event.currentTarget);
+                var target = elem.attr('ajax:target');
+				var options = bdajax.parsetarget(target);
+				$.extend(options, {
+					action_id: 'add_item',
+                    success: function(data) {
+                        if (!data) {
+                            bdajax.error('Empty response');
+                            return;
+                        }
+                        if (!data.success) {
+                            bdajax.error(data.message);
+                            return;
+                        }
+                    }
+                });
+				ugm.actions.perform(options);
             },
             
             // remove item from member
             remove_item: function(event) {
                 event.preventDefault();
+				var elem = $(event.currentTarget);
+                var target = elem.attr('ajax:target');
+				var options = bdajax.parsetarget(target);
+				$.extend(options, {
+					action_id: 'remove_item',
+                    success: function(data) {
+                        if (!data) {
+                            bdajax.error('Empty response');
+                            return;
+                        }
+                        if (!data.success) {
+                            bdajax.error(data.message);
+                            return;
+                        }
+                    }
+                });
+				ugm.actions.perform(options);
             },
             
             // perform listing item action

@@ -53,7 +53,6 @@ class UserAddToGroupAction(Action):
     def __call__(self):
         """Add user to group.
         """
-        print 'add item user'
         return {
             'success': True,
             'message': 'Added user to group',
@@ -66,7 +65,6 @@ class UserRemoveFromGroupAction(Action):
     def __call__(self):
         """Remove user from group.
         """
-        print 'remove item user'
         return {
             'success': True,
             'message': 'Removed User from Group',
@@ -95,7 +93,6 @@ class GroupAddUserAction(Action):
     def __call__(self):
         """Add user to group.
         """
-        print 'add item group'
         return {
             'success': True,
             'message': 'Added user to group',
@@ -108,7 +105,6 @@ class GroupRemoveUserAction(Action):
     def __call__(self):
         """Remove user from group.
         """
-        print 'remove item group'
         return {
             'success': True,
             'message': 'Removed user from group',

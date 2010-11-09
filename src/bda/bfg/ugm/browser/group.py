@@ -3,7 +3,10 @@ from bda.bfg.tile import (
     tile,
     Tile,
 )
-from bda.bfg.app.browser.utils import make_url
+from bda.bfg.app.browser.utils import (
+    make_url,
+    make_query,
+)
 from bda.bfg.app.browser.form import EditForm
 from bda.bfg.ugm.model.interfaces import IGroup
 from.bda.bfg.ugm.browser.columns import Column
@@ -36,10 +39,17 @@ class GroupColumnListing(ColumnListing):
     def items(self):
         ret = list()
         for i in range(10):
-            ret.append({
-                'target': make_url(self.request,
+            item_target = make_url(self.request,
                                    node=self.model.root['users'],
-                                   resource=u'user%i' % i),
+                                   resource=u'user%i' % i)
+            action_query = make_query(id=u'user%i' % i)
+            action_target = make_url(self.request,
+                                     node=self.model.root['groups'],
+                                     resource=self.model.__name__,
+                                     query=action_query)
+            
+            ret.append({
+                'target': item_target,
                 'head': 'Group Member - User %i' % i,
                 'current': False,
                 'actions': [
@@ -47,13 +57,13 @@ class GroupColumnListing(ColumnListing):
                         'id': 'add_item',
                         'enabled': True,
                         'title': 'Add User to selected Group',
-                        'target': u'',
+                        'target': action_target,
                     },
                     {
                         'id': 'remove_item',
                         'enabled': True,
                         'title': 'Remove User from selected Group',
-                        'target': u'',
+                        'target': action_target,
                     },
                 ],
             })
