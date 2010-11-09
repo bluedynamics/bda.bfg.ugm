@@ -1,5 +1,5 @@
-import unittest
 import doctest 
+import unittest2 as unittest
 from pprint import pprint
 from interlude import interact
 
@@ -27,4 +27,4 @@ def test_suite():
     ])
 
 if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite') 
+    unittest.main(defaultTest='test_suite')
