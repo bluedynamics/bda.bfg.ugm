@@ -35,6 +35,8 @@ class UserColumnBatch(ColumnBatch):
       interface=IUser, permission='view')
 class UserColumnListing(ColumnListing):
     
+    slot = 'rightlisting'
+    
     @property
     def items(self):
         ret = list()
@@ -72,6 +74,8 @@ class UserColumnListing(ColumnListing):
 @tile('allcolumnlisting', 'templates/column_listing.pt',
       interface=IUser, permission='view')
 class AllUserColumnListing(ColumnListing):
+    
+    slot = 'rightlisting'
     
     @property
     def items(self):

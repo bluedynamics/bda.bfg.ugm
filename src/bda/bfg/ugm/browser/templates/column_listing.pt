@@ -2,7 +2,7 @@
   
   <div class="columnlisting">
     
-    <ul>
+    <ul class="${context.slot}">
       <tal:item repeat="item context.items">
         <li ajax:target="${item['target']}"
             tal:attributes="class item['current'] and 'selected' or None">

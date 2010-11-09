@@ -17,7 +17,7 @@
         
         // bind left listing trigger
         left_listing_nav_binder: function(context) {
-            var sel = $('div.left_column div.li_trigger', context);
+            var sel = $('ul.leftlisting div.li_trigger', context);
             sel.unbind();
             sel.bind('click', ugm.left_listing_nav_cb);
         },
@@ -41,7 +41,7 @@
         
         // bind right listing trigger
         right_listing_nav_binder: function(context) {
-            var sel = $('div.right_column div.li_trigger', context);
+			var sel = $('ul.rightlisting div.li_trigger', context);
             sel.unbind();
             sel.bind('click', ugm.right_listing_nav_cb);
         },

@@ -27,6 +27,8 @@ class UsersColumnBatch(ColumnBatch):
       interface=IUsers, permission='view')
 class UsersColumnListing(ColumnListing):
     
+    slot = 'leftlisting'
+    
     @property
     def current_id(self):
         return self.request.get('_listing_current_id')

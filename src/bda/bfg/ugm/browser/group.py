@@ -35,6 +35,8 @@ class GroupColumnBatch(ColumnBatch):
       interface=IGroup, permission='view')
 class GroupColumnListing(ColumnListing):
     
+    slot = 'rightlisting'
+    
     @property
     def items(self):
         ret = list()
@@ -74,6 +76,8 @@ class GroupColumnListing(ColumnListing):
 @tile('allcolumnlisting', 'templates/column_listing.pt',
       interface=IGroup, permission='view')
 class AllGroupColumnListing(ColumnListing):
+    
+    slot = 'rightlisting'
     
     @property
     def items(self):

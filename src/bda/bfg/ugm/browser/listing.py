@@ -5,6 +5,7 @@ class ColumnListing(Tile):
     """
     
     current_id = None
+    slot = None
     
     @property
     def items(self):
