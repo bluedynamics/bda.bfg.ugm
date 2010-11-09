@@ -45,7 +45,7 @@ class GroupsColumnListing(ColumnListing):
                     {
                         'id': 'delete_item',
                         'enabled': True,
-                        'title': 'Delete Item',
+                        'title': 'Delete Group',
                     }
                 ],
             })

@@ -46,12 +46,12 @@ class GroupColumnListing(ColumnListing):
                     {
                         'id': 'add_item',
                         'enabled': True,
-                        'title': 'Add Item',
+                        'title': 'Add User to selected Group',
                     },
                     {
                         'id': 'remove_item',
                         'enabled': True,
-                        'title': 'Remove Item',
+                        'title': 'Remove User from selected Group',
                     },
                 ],
             })
