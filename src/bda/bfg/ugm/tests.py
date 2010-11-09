@@ -8,7 +8,7 @@ optionflags = doctest.NORMALIZE_WHITESPACE | \
               doctest.REPORT_ONLY_FIRST_FAILURE
 
 TESTFILES = [
-    'model/root.txt',
+    'model/ugm.txt',
     'model/setting.txt',
     'model/users.txt',
     'model/user.txt',

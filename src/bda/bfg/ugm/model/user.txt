@@ -3,9 +3,9 @@ User Adapter Application Node
 
     >>> from bda.bfg.ugm.model.users import Users
     >>> users = Users()
-    >>> user = users['foo']
+    >>> user = users['user0']
     >>> user
-    <User object 'foo' at ...>
+    <User object 'user0' at ...>
 
 Check Properties.
 ::

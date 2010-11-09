@@ -3,9 +3,9 @@ Group Adapter Application Node
 
     >>> from bda.bfg.ugm.model.groups import Groups
     >>> groups = Groups()
-    >>> group = groups['foo']
+    >>> group = groups['group0']
     >>> group
-    <Group object 'foo' at ...>
+    <Group object 'group0' at ...>
 
 Check Properties.
 ::
