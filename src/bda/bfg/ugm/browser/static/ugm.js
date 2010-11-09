@@ -79,7 +79,6 @@
 				bdajax.dialog(message, function() {
 					alert('delete now');
 				});
-				bdajax.message(message);
 			},
 			
 			// add item as member
