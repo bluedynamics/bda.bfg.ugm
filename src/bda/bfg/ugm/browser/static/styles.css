@@ -70,22 +70,22 @@ ul#mainmenu li a {
 	font-size:51px;
 }
 ul#mainmenu li.node-users a {
-	background: url('/bda.bfg.ugm.static/menu_users.png') top left no-repeat;
+	background: url('/bda.bfg.ugm.static/images/menu_users.png') top left no-repeat;
 }
 ul#mainmenu li.node-users a.current_page_item {
-    background: url('/bda.bfg.ugm.static/menu_users_selected.png') top left no-repeat;
+    background: url('/bda.bfg.ugm.static/images/menu_users_selected.png') top left no-repeat;
 }
 ul#mainmenu li.node-groups a {
-    background: url('/bda.bfg.ugm.static/menu_groups.png') top left no-repeat;
+    background: url('/bda.bfg.ugm.static/images/menu_groups.png') top left no-repeat;
 }
 ul#mainmenu li.node-groups a.current_page_item {
-    background: url('/bda.bfg.ugm.static/menu_groups_selected.png') top left no-repeat;
+    background: url('/bda.bfg.ugm.static/images/menu_groups_selected.png') top left no-repeat;
 }
 ul#mainmenu li.node-settings a {
-    background: url('/bda.bfg.ugm.static/menu_settings.png') top left no-repeat;
+    background: url('/bda.bfg.ugm.static/images/menu_settings.png') top left no-repeat;
 }
 ul#mainmenu li.node-settings a.current_page_item {
-    background: url('/bda.bfg.ugm.static/menu_settings_selected.png') top left no-repeat;
+    background: url('/bda.bfg.ugm.static/images/menu_settings_selected.png') top left no-repeat;
 }
 div#content {
 	padding-top:12px;
@@ -107,7 +107,7 @@ div.box,
 #form-loginform,
 #form-addform,
 #form-editform {
-	background: url('/bda.bfg.ugm.static/box.gif') top left no-repeat;
+	background: url('/bda.bfg.ugm.static/images/box.gif') top left no-repeat;
 	padding:12px;
 }
 /* columns */
@@ -239,23 +239,23 @@ a.action {
 	margin-top:1px;
 }
 a.add_item {
-	background:url('/bda.bfg.ugm.static/icon_add.png') 50% 50% no-repeat;
+	background:url('/bda.bfg.ugm.static/images/icon_add.png') 50% 50% no-repeat;
 	cursor:pointer;
 }
 a.add_item_disabled {
-    background:url('/bda.bfg.ugm.static/icon_add_disabled.png') 50% 50% no-repeat;
+    background:url('/bda.bfg.ugm.static/images/icon_add_disabled.png') 50% 50% no-repeat;
 }
 a.remove_item {
-	background:url('/bda.bfg.ugm.static/icon_remove.png') 50% 50% no-repeat;
+	background:url('/bda.bfg.ugm.static/images/icon_remove.png') 50% 50% no-repeat;
 	cursor:pointer;
 }
 a.remove_item_disabled {
-    background:url('/bda.bfg.ugm.static/icon_remove_disabled.png') 50% 50% no-repeat;
+    background:url('/bda.bfg.ugm.static/images/icon_remove_disabled.png') 50% 50% no-repeat;
 }
 a.delete_item {
-	background:url('/bda.bfg.ugm.static/icon_delete.png') 50% 50% no-repeat;
+	background:url('/bda.bfg.ugm.static/images/icon_delete.png') 50% 50% no-repeat;
 	cursor:pointer;
 }
 a.delete_item_disabled {
-    background:url('/bda.bfg.ugm.static/icon_delete_disabled.png') 50% 50% no-repeat;
+    background:url('/bda.bfg.ugm.static/images/icon_delete_disabled.png') 50% 50% no-repeat;
 }
