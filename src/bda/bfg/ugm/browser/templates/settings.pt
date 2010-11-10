@@ -47,5 +47,27 @@
         OK
       </strong>
     </p>
+    
+    <p>
+      Users DN:
+      <strong tal:define="status context.ldap_users"
+              tal:content="status"
+              tal:attributes="style status == 'OK'
+                                    and 'color:green;'
+                                    or 'color:red;'">
+        OK
+      </strong>
+    </p>
+    
+    <p>
+      Groups DN:
+      <strong tal:define="status context.ldap_groups"
+              tal:content="status"
+              tal:attributes="style status == 'OK'
+                                    and 'color:green;'
+                                    or 'color:red;'">
+        OK
+      </strong>
+    </p>
   </div>
 </tal:ajax>

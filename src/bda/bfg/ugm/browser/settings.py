@@ -13,6 +13,18 @@ class Settings(ProtectedContentTile):
         if self.model.ldap_connectivity == 'success':
             return 'OK'
         return 'Down'
+    
+    @property
+    def ldap_users(self):
+        if self.model.ldap_users_container_valid:
+            return 'OK'
+        return 'Inexistent'
+        
+    @property
+    def ldap_groups(self):
+        if self.model.ldap_groups_container_valid:
+            return 'OK'
+        return 'Inexistent'
 
 @tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):
@@ -93,3 +105,4 @@ class LDAPSettingsForm(EditForm):
         self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
         self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
         self.model()
+        self.model.invalidate()

@@ -2,6 +2,7 @@ import os
 from zope.interface import implements
 from bda.ldap import LDAPProps
 from bda.ldap.base import testLDAPConnectivity
+from bda.ldap.node import queryNode
 from bda.ldap.users import LDAPUsersConfig
 from repoze.bfg.security import (
     Everyone,
@@ -60,6 +61,24 @@ class Settings(BaseNode):
     def ldap_connectivity(self):
         config = self._config
         return testLDAPConnectivity(config.server, int(config.port))
+    
+    @property
+    def ldap_users_container_valid(self):
+        try:
+            queryNode(self.ldap_props, self._config.users_dn)
+            return True
+        except Exception:
+            # XXX: ldap no such object
+            return False
+    
+    @property
+    def ldap_groups_container_valid(self):
+        try:
+            queryNode(self.ldap_props, self._config.groups_dn)
+            return True
+        except Exception:
+            # XXX: ldap no such object
+            return False
     
     @property
     def ldap_props(self):
