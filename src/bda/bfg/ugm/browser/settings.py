@@ -10,9 +10,9 @@ class Settings(ProtectedContentTile):
     
     @property
     def ldap_status(self):
-        # XXX
-        return 'OK'
-        #return 'Failed'
+        if self.model.ldap_connectivity == 'success':
+            return 'OK'
+        return 'Down'
 
 @tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):

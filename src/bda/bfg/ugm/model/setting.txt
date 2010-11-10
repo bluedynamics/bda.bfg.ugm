@@ -23,13 +23,13 @@ Check default LDAP attributes.
 
     >>> attrs = settings.attrs
     >>> attrs.server
-    'localhost'
+    '127.0.0.1'
     
     >>> attrs.port
-    '389'
+    '12345'
     
     >>> attrs.user
-    'cn=admin,dc=example,dc=com'
+    'cn=Manager,dc=my-domain,dc=com'
     
     >>> attrs.password
     'secret'

@@ -36,14 +36,14 @@ class UsersColumnListing(ColumnListing):
     @property
     def items(self):
         ret = list()
-        for i in range(1000):
+        for key in self.model:
             target = make_url(self.request,
                               node=self.model,
-                              resource=u'user%i' % i)
+                              resource=key)
             ret.append({
                 'target': target,
-                'head': 'User - %i' % i,
-                'current': self.current_id == u'user%i' % i and True or False,
+                'head': key, # XXX
+                'current': self.current_id == key and True or False,
                 'actions': [
                     {
                         'id': 'delete_item',
