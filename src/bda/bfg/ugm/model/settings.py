@@ -60,7 +60,7 @@ class Settings(BaseNode):
     @property
     def ldap_connectivity(self):
         config = self._config
-        return testLDAPConnectivity(config.server, int(config.port))
+        return testLDAPConnectivity(props=self.ldap_props)
     
     @property
     def ldap_users_container_valid(self):
@@ -84,8 +84,7 @@ class Settings(BaseNode):
     def ldap_props(self):
         if self._ldap_props is None:
             config = self._config
-            self._ldap_props = LDAPProps(server=config.server,
-                                         port=int(config.port),
+            self._ldap_props = LDAPProps(uri=config.uri,
                                          user=config.user,
                                          password=config.password)
         return self._ldap_props

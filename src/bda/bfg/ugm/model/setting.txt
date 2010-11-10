@@ -22,11 +22,9 @@ Check default LDAP attributes.
 ::
 
     >>> attrs = settings.attrs
-    >>> attrs.server
-    '127.0.0.1'
     
-    >>> attrs.port
-    '12345'
+    >>> attrs.uri
+    'ldap://127.0.0.1:12345'
     
     >>> attrs.user
     'cn=Manager,dc=my-domain,dc=com'

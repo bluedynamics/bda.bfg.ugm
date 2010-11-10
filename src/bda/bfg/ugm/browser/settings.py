@@ -34,19 +34,12 @@ class LDAPSettingsForm(EditForm):
         form = factory(u'form',
                        name='editform',
                        props={'action': '%s/edit' % self.nodeurl})
-        form['server'] = factory(
+        form['uri'] = factory(
             'field:label:error:text',
-            value = self.model.attrs.server,
+            value = self.model.attrs.uri,
             props = {
-                'required': 'No server defined',
-                'label': 'LDAP Server',
-            })
-        form['port'] = factory(
-            'field:label:error:text',
-            value = self.model.attrs.port,
-            props = {
-                'required': 'No port defined',
-                'label': 'LDAP Port',
+                'required': 'No URI defined',
+                'label': 'LDAP URI',
             })
         form['user'] = factory(
             'field:label:error:text',
@@ -69,12 +62,40 @@ class LDAPSettingsForm(EditForm):
                 'required': 'No Users DN defined',
                 'label': 'Users Base DN',
             })
+        form['users_scope'] = factory(
+            'field:label:error:text',
+            value = self.model.attrs.users_scope,
+            props = {
+                'required': 'No users scope defined',
+                'label': 'Users scope',
+            })
+        form['users_query'] = factory(
+            'field:label:error:text',
+            value = self.model.attrs.users_query,
+            props = {
+                'required': 'No users query defined',
+                'label': 'Users query',
+            })
         form['groups_dn'] = factory(
             'field:label:error:text',
             value = self.model.attrs.groups_dn,
             props = {
                 'required': 'No Groups DN defined',
                 'label': 'Groups Base DN',
+            })
+        form['groups_scope'] = factory(
+            'field:label:error:text',
+            value = self.model.attrs.groups_scope,
+            props = {
+                'required': 'No groups scope defined',
+                'label': 'Groups scope',
+            })
+        form['groups_query'] = factory(
+            'field:label:error:text',
+            value = self.model.attrs.groups_query,
+            props = {
+                'required': 'No groups query defined',
+                'label': 'Groups query',
             })
         form['save'] = factory(
             'submit',
@@ -98,11 +119,14 @@ class LDAPSettingsForm(EditForm):
         return form
     
     def save(self, widget, data):
-        self.model.attrs.server = data.fetch('editform.server').extracted
-        self.model.attrs.port = data.fetch('editform.port').extracted
+        self.model.attrs.uri = data.fetch('editform.uri').extracted
         self.model.attrs.user = data.fetch('editform.user').extracted
         self.model.attrs.password = data.fetch('editform.password').extracted
         self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
+        self.model.attrs.users_scope = data.fetch('editform.users_scope').extracted
+        self.model.attrs.users_query = data.fetch('editform.users_query').extracted
         self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
+        self.model.attrs.groups_scope = data.fetch('editform.groups_scope').extracted
+        self.model.attrs.groups_query = data.fetch('editform.groups_query').extracted
         self.model()
         self.model.invalidate()
