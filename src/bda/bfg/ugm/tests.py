@@ -20,7 +20,7 @@ BASE = Base()
 DOCFILES = [
     ('model/ugm.txt', BASE),
     ('model/setting.txt', BASE),
-    ('model/users.txt', BASE),
+    ('model/users.txt', LDIF_users300),
     ('model/user.txt', LDIF_users300),
     ('model/groups.txt', BASE),
     ('model/group.txt', BASE),

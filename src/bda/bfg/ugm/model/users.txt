@@ -2,7 +2,7 @@ Users Application Node
 =======================
 
     >>> from bda.bfg.ugm.model.users import Users
-    >>> users = Users()
+    >>> users = Users(layer['props'], layer['ucfg'])
 
 Check Properties.
 ::
@@ -24,3 +24,8 @@ Check Metadata.
     
     >>> md.description
     'Container for Users'
+
+XXX
+
+    >>> len([x for x in users])
+    300

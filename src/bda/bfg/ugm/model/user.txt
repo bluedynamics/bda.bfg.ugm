@@ -2,10 +2,10 @@ User Adapter Application Node
 =============================
 
     >>> from bda.bfg.ugm.model.users import Users
-    >>> users = Users()
-    >>> user = users['user0']
+    >>> users = Users(layer['props'], layer['ucfg'])
+    >>> user = users['uid0']
     >>> user
-    <User object 'user0' at ...>
+    <User object 'uid0' at ...>
 
 Check Properties.
 ::
