@@ -17,10 +17,12 @@ class Users(BaseNode):
         application code.
         """
         super(Users, self).__init__()
-        self._testenv = {
-            'props': props,
-            'ucfg': ucfg,
-        }
+        self._testenv = None
+        if props or ucfg:
+            self._testenv = {
+                'props': props,
+                'ucfg': ucfg,
+            }
         self._ldap_users = None
 
     @property
@@ -37,7 +39,7 @@ class Users(BaseNode):
     @property
     def ldap_users(self):
         if self._ldap_users is None:
-            if self._testenv['props']:
+            if self._testenv is not None:
                 props = self._testenv['props']
                 ucfg = self._testenv['ucfg']
             else:
