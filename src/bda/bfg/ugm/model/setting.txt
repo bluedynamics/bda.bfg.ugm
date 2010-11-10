@@ -35,7 +35,7 @@ Check default LDAP attributes.
     'secret'
     
     >>> attrs.users_dn
-    'ou=users,dc=example,dc=com'
+    'ou=users300,dc=my-domain,dc=com'
     
     >>> attrs.groups_dn
     'ou=groups,dc=example,dc=com'
