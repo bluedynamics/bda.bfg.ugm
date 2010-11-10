@@ -30,25 +30,26 @@ class Users(BaseNode):
     @property
     def ldap_props(self):
         if self._ldap_props is None:
-            config = self.__parent__['setttings']._config
-            self._ldap_props = LDAPProps(
-                    baseDN=config.users_dn,
-                    server=config.server,
-                    port=config.port,
-                    user=config.user,
-                    password=config.password,
-                    )
+            config = self.__parent__['settings']._config
+            self._ldap_props = LDAPProps(server=config.server,
+                                         port=int(config.port),
+                                         user=config.user,
+                                         password=config.password)
         return self._ldap_props
 
     @property
     def ldap_ucfg(self):
         if self._ldap_ucfg is None:
-            config = self.__parent__['setttings']._config
+            config = self.__parent__['settings']._config
             # XXX: extend settings: uri, attrmap, scope, queryfilter
-            self._ldap_ucfg = LDAPUsersConfig(
-                    baseDN=config.users_dn,
-                    attrmap=dict(),
-                    )
+            self._ldap_ucfg = LDAPUsersConfig(baseDN=config.users_dn,
+                                              attrmap={
+                                                  'id': 'uid',
+                                                  'login': 'uid',
+                                                  'cn': 'cn',
+                                                  'sn': 'sn',
+                                                  'mail': 'mail',
+                                              })
         return self._ldap_ucfg
     
     @property
