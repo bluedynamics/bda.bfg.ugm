@@ -281,18 +281,13 @@
 		base_name: 'editform.users_attrmap.entry',
 		
 		create_row: function() {
-			var index = 9999;
-			var base_id = dictwidget.base_id;
-			var base_name = dictwidget.base_name;
 			var row = '';
 			row += '<tr>';
-			row +=   '<td>';
-			row +=     '<input id="' + base_id + index + '-key" type="text" ';
-			row +=             'value="" name="' + base_name + index + '.key"/>';
+			row +=   '<td class="key">';
+			row +=     '<input type="text" value="" />';
 			row +=   '</td>';
-			row +=   '<td>';
-			row +=     '<input id="' + base_id + index + '-value" type="text" ';
-			row +=             'value="" name="' + base_name + index + '.value"/>';
+			row +=   '<td class="value">';
+			row +=     '<input type="text" value="" />';
 			row +=   '</td>';
 			row +=   '<td>';
 			row +=     '<div class="dict_actions">';
@@ -303,7 +298,7 @@
 			row +=     '</div>';
 			row +=   '</td>';
 			row += '</tr>';
-			return $(row);
+			return row;
 		},
 		
 		get_row: function(action) {
@@ -311,7 +306,20 @@
 		},
 		
 		reset_indices: function(context) {
-			
+			var index = 0;
+			$('tr', context).each(function() {
+				row = $(this);
+				key = $('td.key input', row);
+				key_id = dictwidget.base_id + index + '-key';
+				key_name = dictwidget.base_name + index + '.key';
+				key.attr('id', key_id).attr('name', key_name);
+				value = $('td.value input', row);
+				value_id = dictwidget.base_id + index + '-value';
+                value_name = dictwidget.base_name + index + '.value';
+                value.attr('id', value_id).attr('name', value_name);
+				index++;
+			});
+			dictwidget.dict_widget_binder(context);
 		},
 		
 		dict_widget_binder: function(context) {
@@ -325,23 +333,26 @@
 					if (container.get(0).tagName.toLowerCase() == 'tbody') {
 						row.after(new_row);
 					} else {
-						$('tbody', container.parent()).prepend(new_row);
+						container = $('tbody', container.parent());
+						container.prepend(new_row);
 					}
-					dictwidget.reset_indices(new_row);
-					dictwidget.dict_widget_binder(new_row);
+					dictwidget.reset_indices(container);
 				});
+			
 			$('a.dict_row_remove', context)
                 .unbind()
                 .bind('click', function(event) {
 					event.preventDefault();
                     var row = dictwidget.get_row(this);
                 });
+			
 			$('a.dict_row_up', context)
                 .unbind()
                 .bind('click', function(event) {
 					event.preventDefault();
                     var row = dictwidget.get_row(this);
                 });
+			
 			$('a.dict_row_down', context)
                 .unbind()
                 .bind('click', function(event) {
