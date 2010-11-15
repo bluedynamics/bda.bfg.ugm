@@ -344,6 +344,8 @@
                 .bind('click', function(event) {
 					event.preventDefault();
                     var row = dictwidget.get_row(this);
+					row.remove();
+					dictwidget.reset_indices(row.parent());
                 });
 			
 			$('a.dict_row_up', context)
@@ -351,6 +353,8 @@
                 .bind('click', function(event) {
 					event.preventDefault();
                     var row = dictwidget.get_row(this);
+					row.insertBefore(row.prev());
+					dictwidget.reset_indices(row.parent());
                 });
 			
 			$('a.dict_row_down', context)
@@ -358,6 +362,8 @@
                 .bind('click', function(event) {
 					event.preventDefault();
                     var row = dictwidget.get_row(this);
+					row.insertAfter(row.next());
+					dictwidget.reset_indices(row.parent());
                 });
         }
 	};
