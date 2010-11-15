@@ -1,3 +1,4 @@
+from odict import odict
 from yafowil.base import factory
 from bda.bfg.tile import tile
 from bda.bfg.app.browser.layout import ProtectedContentTile
@@ -75,6 +76,20 @@ class LDAPSettingsForm(EditForm):
             props = {
                 'required': 'No users query defined',
                 'label': 'Users query',
+            })
+        attrmap = odict()
+        attrmap['foo'] = 'foo'
+        attrmap['bar'] = 'bar'
+        form['users_attrmap'] = factory(
+            'field:label:error:dict',
+            value = attrmap,
+            props = {
+                'required': 'No Attribute mapping for Users defined',
+                'label': 'User attribute mapping',
+                'head': {
+                    'key': 'Application Key',
+                    'value': 'LDAP Name',
+                }
             })
         form['groups_dn'] = factory(
             'field:label:error:text',
