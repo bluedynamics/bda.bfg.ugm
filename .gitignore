@@ -4,6 +4,7 @@
 .installed.cfg
 .mr.developer.cfg
 src/bda.bfg.ugm.egg-info
+src/zc.recipe.cmmi/src/zc.recipe.cmmi.egg-info
 bin
 develop-eggs
 devsrc
