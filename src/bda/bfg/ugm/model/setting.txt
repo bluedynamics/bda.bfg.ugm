@@ -24,19 +24,19 @@ Check default LDAP attributes.
     >>> attrs = settings.attrs
     
     >>> attrs.uri
-    'ldap://127.0.0.1:12345'
+    u'ldap://127.0.0.1:12345'
     
     >>> attrs.user
-    'cn=Manager,dc=my-domain,dc=com'
+    u'cn=Manager,dc=my-domain,dc=com'
     
     >>> attrs.password
-    'secret'
+    u'secret'
     
     >>> attrs.users_dn
-    'ou=users300,dc=my-domain,dc=com'
+    u'ou=users300,dc=my-domain,dc=com'
     
     >>> attrs.groups_dn
-    'ou=groups,dc=example,dc=com'
+    u'ou=groups,dc=example,dc=com'
     
     >>> md = settings.metadata
     >>> md.title
