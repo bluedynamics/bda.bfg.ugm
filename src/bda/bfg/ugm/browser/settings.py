@@ -1,4 +1,9 @@
 from odict import odict
+from bda.ldap.scope import (
+    BASE,
+    ONELEVEL,
+    SUBTREE,
+)
 from yafowil.base import factory
 from bda.bfg.tile import tile
 from bda.bfg.app.browser.layout import ProtectedContentTile
@@ -26,6 +31,12 @@ class Settings(ProtectedContentTile):
         if self.model.ldap_groups_container_valid:
             return 'OK'
         return 'Inexistent'
+
+scope_vocab = [
+    (str(BASE), 'BASE'),
+    (str(ONELEVEL), 'ONELEVEL'),
+    (str(SUBTREE), 'SUBTREE'),
+]
 
 @tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):
@@ -64,30 +75,26 @@ class LDAPSettingsForm(EditForm):
                 'label': 'Users Base DN',
             })
         form['users_scope'] = factory(
-            'field:label:error:text',
+            'field:label:select',
             value = self.model.attrs.users_scope,
             props = {
-                'required': 'No users scope defined',
                 'label': 'Users scope',
+                'vocabulary': scope_vocab,
             })
         form['users_query'] = factory(
-            'field:label:error:text',
+            'field:label:text',
             value = self.model.attrs.users_query,
             props = {
-                'required': 'No users query defined',
                 'label': 'Users query',
             })
-        attrmap = odict()
-        attrmap['foo'] = 'foo'
-        attrmap['bar'] = 'bar'
         form['users_attrmap'] = factory(
             'field:label:error:dict',
-            value = attrmap,
+            value = self.model.attrs.users_attrmap,
             props = {
                 'required': 'No Attribute mapping for Users defined',
                 'label': 'User attribute mapping',
                 'head': {
-                    'key': 'Application Key',
+                    'key': 'Application Name',
                     'value': 'LDAP Name',
                 }
             })
@@ -99,17 +106,16 @@ class LDAPSettingsForm(EditForm):
                 'label': 'Groups Base DN',
             })
         form['groups_scope'] = factory(
-            'field:label:error:text',
+            'field:label:select',
             value = self.model.attrs.groups_scope,
             props = {
-                'required': 'No groups scope defined',
                 'label': 'Groups scope',
+                'vocabulary': scope_vocab,
             })
         form['groups_query'] = factory(
-            'field:label:error:text',
+            'field:label:text',
             value = self.model.attrs.groups_query,
             props = {
-                'required': 'No groups query defined',
                 'label': 'Groups query',
             })
         form['save'] = factory(
@@ -140,6 +146,7 @@ class LDAPSettingsForm(EditForm):
         self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
         self.model.attrs.users_scope = data.fetch('editform.users_scope').extracted
         self.model.attrs.users_query = data.fetch('editform.users_query').extracted
+        self.model.attrs.users_attrmap = data.fetch('editform.users_attrmap').extracted
         self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
         self.model.attrs.groups_scope = data.fetch('editform.groups_scope').extracted
         self.model.attrs.groups_query = data.fetch('editform.groups_query').extracted

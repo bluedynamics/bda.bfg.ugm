@@ -13,7 +13,7 @@ from repoze.bfg.security import (
 from bda.bfg.app.model import (
     BaseNode,
     Properties,
-    ConfigProperties,
+    XMLProperties,
     BaseMetadata,
 )
 from bda.bfg.ugm.model.interfaces import ISettings
@@ -35,8 +35,8 @@ class Settings(BaseNode):
         for testing purposes only
         """
         BaseNode.__init__(self, name)
-        path = os.path.join(_app_path or APP_PATH, 'etc', 'ldap.cfg')
-        self._config = ConfigProperties(path)
+        path = os.path.join(_app_path or APP_PATH, 'etc', 'ldap.xml')
+        self._config = XMLProperties(path)
         self.invalidate()
     
     def __call__(self):

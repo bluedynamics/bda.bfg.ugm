@@ -12,12 +12,8 @@
       
     <table>
       <tr>
-        <td><strong>Server:</strong></td>
-        <td tal:content="model.attrs.server">localhost</td>
-      </tr>
-      <tr>
-        <td><strong>Port:</strong></td>
-        <td tal:content="model.attrs.port">8983</td>
+        <td><strong>Uri:</strong></td>
+        <td tal:content="model.attrs.uri">ldap://127.0.0.1:12345</td>
       </tr>
       <tr>
         <td><strong>Manager DN:</strong></td>
@@ -25,15 +21,34 @@
       </tr>
       <tr>
         <td><strong>Manager Password:</strong></td>
-        <td tal:content="len(model.attrs.password) * '*'"></td>
+        <td tal:content="model.attrs.password and len(model.attrs.password) * '*' or ''"></td>
       </tr>
       <tr>
         <td><strong>Users DN:</strong></td>
         <td tal:content="model.attrs.users_dn"></td>
       </tr>
       <tr>
+        <td><strong>Users Scope:</strong></td>
+        <td tal:content="model.attrs.users_scope"></td>
+      </tr>
+      <tr>
+        <td><strong>Users Query:</strong></td>
+        <td tal:content="model.attrs.users_query"></td>
+      </tr>
+      
+      users_attrmap
+      
+      <tr>
         <td><strong>Groups DN:</strong></td>
         <td tal:content="model.attrs.groups_dn"></td>
+      </tr>
+      <tr>
+        <td><strong>Groups Scope:</strong></td>
+        <td tal:content="model.attrs.groups_scope"></td>
+      </tr>
+      <tr>
+        <td><strong>Groups Query:</strong></td>
+        <td tal:content="model.attrs.groups_query"></td>
       </tr>
     </table>
 
