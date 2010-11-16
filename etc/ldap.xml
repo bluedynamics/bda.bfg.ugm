@@ -1,4 +1,10 @@
 <properties>
+  <uri>ldap://127.0.0.1:12345</uri>
+  <user>cn=Manager,dc=my-domain,dc=com</user>
+  <password>secret</password>
+  <users_dn>ou=users300,dc=my-domain,dc=com</users_dn>
+  <users_scope>0</users_scope>
+  <users_query></users_query>
   <users_attrmap>
     <elem>
       <key>Login</key>
@@ -9,12 +15,6 @@
       <value>sn</value>
     </elem>
   </users_attrmap>
-  <users_query></users_query>
-  <users_scope>0</users_scope>
-  <users_dn>ou=users300,dc=my-domain,dc=com</users_dn>
-  <uri>ldap://127.0.0.1:12345</uri>
-  <user>cn=Manager,dc=my-domain,dc=com</user>
-  <password>secret</password>
   <groups_dn>ou=groups,dc=example,dc=com</groups_dn>
   <groups_scope>0</groups_scope>
   <groups_query></groups_query>
