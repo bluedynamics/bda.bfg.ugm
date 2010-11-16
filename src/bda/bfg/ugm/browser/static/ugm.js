@@ -11,10 +11,6 @@
         bdajax.binders.listing_filter_binder = ugm.listing_filter_binder;
         bdajax.binders.listing_actions_binder = ugm.listing_actions_binder;
         bdajax.binders.listing_related_binder = ugm.listing_related_binder;
-		
-		// dict widget stuff XXX: move
-		dictwidget.dict_widget_binder();
-		bdajax.binders.dict_widget_binder = dictwidget.dict_widget_binder;
     });
     
     ugm = {
@@ -273,99 +269,5 @@
             });
         }
     };
-	
-	// dict widget XXX: move to yafowil.widget.dict
-	dictwidget = {
-		
-		base_id: 'input-editform-users_attrmap-entry',
-		base_name: 'editform.users_attrmap.entry',
-		
-		create_row: function() {
-			var row = '';
-			row += '<tr>';
-			row +=   '<td class="key">';
-			row +=     '<input type="text" value="" />';
-			row +=   '</td>';
-			row +=   '<td class="value">';
-			row +=     '<input type="text" value="" />';
-			row +=   '</td>';
-			row +=   '<td>';
-			row +=     '<div class="dict_actions">';
-			row +=       '<a class="dict_row_add" href="#">&nbsp;</a>';
-			row +=       '<a class="dict_row_remove" href="#">&nbsp</a>';
-			row +=       '<a class="dict_row_up" href="#">&nbsp</a>';
-			row +=       '<a class="dict_row_down" href="#">&nbsp</a>';
-			row +=     '</div>';
-			row +=   '</td>';
-			row += '</tr>';
-			return row;
-		},
-		
-		get_row: function(action) {
-			return $(action).parent().parent().parent();
-		},
-		
-		reset_indices: function(context) {
-			var index = 0;
-			$('tr', context).each(function() {
-				row = $(this);
-				key = $('td.key input', row);
-				key_id = dictwidget.base_id + index + '-key';
-				key_name = dictwidget.base_name + index + '.key';
-				key.attr('id', key_id).attr('name', key_name);
-				value = $('td.value input', row);
-				value_id = dictwidget.base_id + index + '-value';
-                value_name = dictwidget.base_name + index + '.value';
-                value.attr('id', value_id).attr('name', value_name);
-				index++;
-			});
-			dictwidget.dict_widget_binder(context);
-		},
-		
-		dict_widget_binder: function(context) {
-			$('a.dict_row_add', context)
-			    .unbind()
-			    .bind('click', function(event) {
-					event.preventDefault();
-					var row = dictwidget.get_row(this);
-					var new_row = dictwidget.create_row();
-					var container = row.parent();
-					if (container.get(0).tagName.toLowerCase() == 'tbody') {
-						row.after(new_row);
-					} else {
-						container = $('tbody', container.parent());
-						container.prepend(new_row);
-					}
-					dictwidget.reset_indices(container);
-				});
-			
-			$('a.dict_row_remove', context)
-                .unbind()
-                .bind('click', function(event) {
-					event.preventDefault();
-                    var row = dictwidget.get_row(this);
-					row.remove();
-					dictwidget.reset_indices(row.parent());
-                });
-			
-			$('a.dict_row_up', context)
-                .unbind()
-                .bind('click', function(event) {
-					event.preventDefault();
-                    var row = dictwidget.get_row(this);
-					row.insertBefore(row.prev());
-					dictwidget.reset_indices(row.parent());
-                });
-			
-			$('a.dict_row_down', context)
-                .unbind()
-                .bind('click', function(event) {
-					event.preventDefault();
-                    var row = dictwidget.get_row(this);
-					row.insertAfter(row.next());
-					dictwidget.reset_indices(row.parent());
-                });
-        }
-	};
     
 })(jQuery);
