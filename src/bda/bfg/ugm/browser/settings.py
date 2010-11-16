@@ -140,15 +140,11 @@ class LDAPSettingsForm(EditForm):
         return form
     
     def save(self, widget, data):
-        self.model.attrs.uri = data.fetch('editform.uri').extracted
-        self.model.attrs.user = data.fetch('editform.user').extracted
-        self.model.attrs.password = data.fetch('editform.password').extracted
-        self.model.attrs.users_dn = data.fetch('editform.users_dn').extracted
-        self.model.attrs.users_scope = data.fetch('editform.users_scope').extracted
-        self.model.attrs.users_query = data.fetch('editform.users_query').extracted
-        self.model.attrs.users_attrmap = data.fetch('editform.users_attrmap').extracted
-        self.model.attrs.groups_dn = data.fetch('editform.groups_dn').extracted
-        self.model.attrs.groups_scope = data.fetch('editform.groups_scope').extracted
-        self.model.attrs.groups_query = data.fetch('editform.groups_query').extracted
+        for attr_name in ['uri', 'user', 'password', 'users_dn', 'users_scope',
+                          'users_query', 'users_attrmap', 'groups_dn',
+                          'groups_scope', 'groups_query']:
+            setattr(self.model.attrs,
+                    attr_name,
+                    data.fetch('editform.%s' % attr_name).extracted)
         self.model()
         self.model.invalidate()
