@@ -40,9 +40,15 @@ class UsersColumnListing(ColumnListing):
             target = make_url(self.request,
                               node=self.model,
                               resource=key)
+            attrs = self.model[key].attrs
+            # XXX: from config
+            head = '%s %s %s' % (attrs.get('cn'),
+                                 attrs.get('sn'),
+                                 '<%s>' % attrs.get('mail'))
+            head = head.strip()
             ret.append({
                 'target': target,
-                'head': key, # XXX
+                'head': head,
                 'current': self.current_id == key and True or False,
                 'actions': [
                     {

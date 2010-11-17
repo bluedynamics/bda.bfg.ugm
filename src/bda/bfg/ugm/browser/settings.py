@@ -148,9 +148,9 @@ class LDAPSettingsForm(EditForm):
         return form
     
     def save(self, widget, data):
+        # XXX: groups stuff -> 'groups_dn', 'groups_scope', 'groups_query'
         for attr_name in ['uri', 'user', 'password', 'users_dn', 'users_scope',
-                          'users_query', 'users_attrmap', 'groups_dn',
-                          'groups_scope', 'groups_query']:
+                          'users_query', 'users_attrmap']:
             setattr(self.model.attrs,
                     attr_name,
                     data.fetch('editform.%s' % attr_name).extracted)
