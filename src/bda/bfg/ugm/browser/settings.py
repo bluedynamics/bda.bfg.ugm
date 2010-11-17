@@ -93,15 +93,29 @@ class LDAPSettingsForm(EditForm):
             props = {
                 'label': 'Users query',
             })
+        users_attrmap = odict()
+        users_attrmap['id'] = self.model.attrs.users_attrmap.get('id')
+        users_attrmap['login'] = self.model.attrs.users_attrmap.get('login')
         form['users_attrmap'] = factory(
             'field:label:error:dict',
-            value = self.model.attrs.users_attrmap,
+            value = users_attrmap,
             props = {
-                'required': 'No Attribute mapping for Users defined',
+                'required': 'User attribute mapping values are mandatory',
                 'label': 'User attribute mapping',
+                'static': True,
                 'head': {
-                    'key': 'Application Name',
-                    'value': 'LDAP Name',
+                    'key': 'Reserved key',
+                    'value': 'LDAP attr name',
+                }
+            })
+        form['users_form_attrmap'] = factory(
+            'field:label:dict',
+            value = self.model.attrs.users_form_attrmap,
+            props = {
+                'label': 'User form attribute mapping',
+                'head': {
+                    'key': 'LDAP attr name',
+                    'value': 'Form label',
                 }
             })
         
@@ -150,7 +164,7 @@ class LDAPSettingsForm(EditForm):
     def save(self, widget, data):
         # XXX: groups stuff -> 'groups_dn', 'groups_scope', 'groups_query'
         for attr_name in ['uri', 'user', 'password', 'users_dn', 'users_scope',
-                          'users_query', 'users_attrmap']:
+                          'users_query', 'users_attrmap', 'users_form_attrmap']:
             setattr(self.model.attrs,
                     attr_name,
                     data.fetch('editform.%s' % attr_name).extracted)

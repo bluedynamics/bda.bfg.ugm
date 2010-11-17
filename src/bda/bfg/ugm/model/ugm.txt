@@ -8,6 +8,11 @@ Root Application Node
     
     >>> root.factories
     odict([('users', <class 'bda.bfg.ugm.model.users.Users'>), 
+    ('settings', <class 'bda.bfg.ugm.model.settings.Settings'>)])
+
+## later
+
+    odict([('users', <class 'bda.bfg.ugm.model.users.Users'>), 
     ('groups', <class 'bda.bfg.ugm.model.groups.Groups'>), 
     ('settings', <class 'bda.bfg.ugm.model.settings.Settings'>)])
     

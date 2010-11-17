@@ -286,13 +286,13 @@ td.left_col {
 
 /* dict widget XXX: move to yafowil.widget.dict */
 .dictwidget {
-	width:402px;
 	border-collapse:collapse;
 }
 .dictwidget input {
 	width:150px;
 }
 .dictwidget th {
+	width:150px;
 	color:#333;
 	font-weight:normal;
 }

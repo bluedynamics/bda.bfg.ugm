@@ -53,15 +53,38 @@
           <table class="attrmap">
             <thead>
               <tr>
-                <th>Application Name</th>
-                <th>LDAP Name</th>
+                <th>Reserved key</th>
+                <th>LDAP attr name</th>
               </tr>
             </thead>
             <tbody>
-              <tr tal:repeat="key attrmap.keys()">
-                <td tal:content="key">key</td>
-                <td tal:content="attrmap[key]">value</td>
+              <tal:rows condition="bool(attrmap)">
+                <tr tal:repeat="key attrmap.keys()">
+                  <td tal:content="key">key</td>
+                  <td tal:content="attrmap[key]">value</td>
+                </tr>
+              </tal:rows>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="left_col"><strong>Users Form Map:</strong></td>
+        <td tal:define="attrmap model.attrs.users_form_attrmap">
+          <table class="attrmap">
+            <thead>
+              <tr>
+                <th>LDAP attr name</th>
+                <th>Form label</th>
               </tr>
+            </thead>
+            <tbody>
+              <tal:rows condition="bool(attrmap)">
+                <tr tal:repeat="key attrmap.keys()">
+                  <td tal:content="key">key</td>
+                  <td tal:content="attrmap[key]">value</td>
+                </tr>
+              </tal:rows>
             </tbody>
           </table>
         </td>
