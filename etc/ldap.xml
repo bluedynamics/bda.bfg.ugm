@@ -20,6 +20,10 @@
   <groups_query></groups_query>
   <users_form_attrmap>
     <elem>
+      <key>uid</key>
+      <value>Login</value>
+    </elem>
+    <elem>
       <key>userPassword</key>
       <value>Password</value>
     </elem>

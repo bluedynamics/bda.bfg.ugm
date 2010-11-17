@@ -126,23 +126,23 @@ class UserForm(object):
                        name='userform',
                        props={'action': action})
         settings = self.model.root['settings']
-        attrmap = settings.attrs.users_attrmap
+        attrmap = settings.attrs.users_form_attrmap
         if not attrmap:
             return form
         for key, val in attrmap.items():
             chain = 'field:error:label:mode:text'
-            if val == 'userPassword':
+            if key == 'userPassword':
                 chain = 'field:error:label:password'
             props = {
-                'label': key
+                'label': val,
             }
-            if val in ['id', 'login', 'userPassword']:
-                props['required'] = 'No %s defined' % key
-            if val in ['uid']:
+            if key in ['userPassword']:
+                props['required'] = 'No %s defined' % val
+            if key in ['uid']:
                 props['mode'] = 'display'
-            form[val] = factory(
+            form[key] = factory(
                 chain,
-                value = self.model.attrs.get(val, ''),
+                value = self.model.attrs.get(key, ''),
                 props = props
             )
         form['save'] = factory(
