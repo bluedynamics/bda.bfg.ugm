@@ -20,12 +20,6 @@ scope_vocab = [
       permission='login', strict=False)
 class Settings(ProtectedContentTile):
     
-    def scope(self, scope):
-        for term in scope_vocab:
-            if term[0] == scope:
-                return term[1]
-        return ''
-    
     @property
     def ldap_status(self):
         if self.model.ldap_connectivity == 'success':
@@ -43,6 +37,12 @@ class Settings(ProtectedContentTile):
         if self.model.ldap_groups_container_valid:
             return 'OK'
         return 'Inexistent'
+    
+    def scope(self, scope):
+        for term in scope_vocab:
+            if term[0] == scope:
+                return term[1]
+        return ''
 
 @tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):
