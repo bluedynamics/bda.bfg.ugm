@@ -7,7 +7,10 @@ from bda.bfg.app.browser.utils import (
     make_url,
     make_query,
 )
-from bda.bfg.app.browser.form import EditForm
+from bda.bfg.app.browser.form import (
+    AddForm,
+    EditForm,
+)
 from bda.bfg.ugm.model.interfaces import IUser
 from.bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
@@ -110,32 +113,37 @@ class AllUserColumnListing(ColumnListing):
             })
         return ret
 
-@tile('editform', interface=IUser, permission="edit")
-class UserEditForm(EditForm):
+class UserForm(object):
     
     @property
     def form(self):
+        resource='add'
+        if self.model.__name__ is not None:
+            resource = 'edit'
+        action = make_url(self.request, node=self.model, resource=resource)
         form = factory(u'form',
-                       name='editform',
-                       props={'action': self.nodeurl})
-        form['name'] = factory(
-            'field:error:label:text',
-            value = self.model.__name__,
+                       name='userform',
+                       props={'action': action})
+        settings = self.model.root['settings']
+        attrmap = settings.attrs.users_attrmap
+        if not attrmap:
+            return form
+        for key, val in attrmap.items():
+            chain = 'field:error:label:mode:text'
+            if val == 'userPassword':
+                chain = 'field:error:label:password'
             props = {
-                'label': 'Name',
-            })
-        form['email'] = factory(
-            'field:error:label:text',
-            value = '%s@my-domain.com' % self.model.__name__,
-            props = {
-                'label': 'E-Mail',
-            })
-        form['phone'] = factory(
-            'field:error:label:text',
-            value = '0815',
-            props = {
-                'label': 'Phone',
-            })
+                'label': key
+            }
+            if val in ['id', 'login', 'userPassword']:
+                props['required'] = 'No %s defined' % key
+            if val in ['uid']:
+                props['mode'] = 'display'
+            form[val] = factory(
+                chain,
+                value = self.model.attrs.get(val, ''),
+                props = props
+            )
         form['save'] = factory(
             'submit',
             props = {
@@ -145,7 +153,25 @@ class UserEditForm(EditForm):
                 'next': self.next,
                 'label': 'Save',
             })
+        if resource =='add':
+            form['cancel'] = factory(
+                'submit',
+                props = {
+                    'action': 'cancel',
+                    'expression': True,
+                    'next': self.next,
+                    'label': 'Cancel',
+                })
         return form
+
+@tile('addform', interface=IUser, permission="view")
+class UserAddForm(UserForm, AddForm):
+    
+     def save(self, widget, data):
+        pass
+
+@tile('editform', interface=IUser, permission="view")
+class UserEditForm(UserForm, EditForm):
     
     def save(self, widget, data):
         pass

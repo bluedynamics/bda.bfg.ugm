@@ -7,12 +7,24 @@
   <users_query></users_query>
   <users_attrmap>
     <elem>
-      <key>Login</key>
+      <key>User ID</key>
       <value>uid</value>
+    </elem>
+    <elem>
+      <key>Password</key>
+      <value>userPassword</value>
+    </elem>
+    <elem>
+      <key>Name</key>
+      <value>cn</value>
     </elem>
     <elem>
       <key>Surname</key>
       <value>sn</value>
+    </elem>
+    <elem>
+      <key>Email Address</key>
+      <value>mail</value>
     </elem>
   </users_attrmap>
   <groups_dn>ou=groups,dc=example,dc=com</groups_dn>

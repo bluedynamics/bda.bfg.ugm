@@ -94,12 +94,11 @@ class Settings(BaseNode):
         if self._ldap_ucfg is None:
             config = self._config
             # XXX: extend settings: uri, attrmap, scope, queryfilter
+            attrmap = dict()
+            for val in self._config.users_attrmap.values():
+                attrmap[val] = val
+            attrmap['id'] = 'uid' # XXX
+            attrmap['login'] = 'uid' # XXX
             self._ldap_ucfg = LDAPUsersConfig(baseDN=config.users_dn,
-                                              attrmap={
-                                                  'id': 'uid',
-                                                  'login': 'uid',
-                                                  'cn': 'cn',
-                                                  'sn': 'sn',
-                                                  'mail': 'mail',
-                                              })
+                                              attrmap=attrmap)
         return self._ldap_ucfg

@@ -229,6 +229,12 @@ div.right_column div.column_limit input {
     float:right;
 	font-size:80%;
 }
+div.right_column div.field div {
+    float:right;
+    font-size:80%;
+	width:160px;
+}
+
 /* action icons */
 a.action {
 	line-height:16px;
