@@ -4,7 +4,6 @@ from bda.bfg.tile import (
 )
 from bda.bfg.app.browser.utils import make_url
 from bda.bfg.ugm.model.interfaces import IGroups
-from.bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
 
@@ -15,17 +14,10 @@ class GroupsLeftColumn(Tile):
     add_label = u"Add Group"
 
 @tile('rightcolumn', interface=IGroups, permission='view')
-class GroupsRightColumn(Column):
-    
-    @property
-    def current_id(self):
-        return self.request.params.get('currid')
+class GroupsRightColumn(Tile):
     
     def render(self):
-        currid = self.current_id
-        if not currid:
-            return u'<div class="right_column">&nbsp;</div>'
-        return self._render(self.model[currid], 'rightcolumn')
+        return u'<div class="right_column">&nbsp;</div>'
 
 @tile('columnbatch', interface=IGroups, permission='view')
 class GroupsColumnBatch(ColumnBatch):
@@ -39,7 +31,7 @@ class GroupsColumnListing(ColumnListing):
     
     @property
     def current_id(self):
-        return self.request.params.get('currid')
+        return self.request.get('_curr_listing_id')
     
     @property
     def items(self):

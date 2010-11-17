@@ -23,7 +23,7 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
-        self.request['currid'] = self.model.__name__
+        self.request['_curr_listing_id'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
@@ -178,6 +178,5 @@ class UserEditForm(UserForm, EditForm):
         pass
     
     def next(self, request):
-        query = make_query(currid=self.model.__name__)
-        url = make_url(request.request, node=self.model.__parent__, query=query)
+        url = make_url(request.request, node=self.model)
         return HTTPFound(url)
