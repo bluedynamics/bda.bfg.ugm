@@ -260,13 +260,23 @@ a.delete_item_disabled {
     background:url('/bda.bfg.ugm.static/images/icon_delete_disabled.png') 50% 50% no-repeat;
 }
 /* Settings */
+.settings {
+	border-collapse:collapse;
+}
 .settings td {
-	padding:2px;
+	padding:4px;
 	vertical-align:top;
 }
 .attrmap {
     width:400px;
 }
+tr.table_seperator td {
+	border-top:#ccc 1px solid;
+}
+td.left_col {
+	text-align:right;
+}
+
 
 /* dict widget XXX: move to yafowil.widget.dict */
 .dictwidget {
