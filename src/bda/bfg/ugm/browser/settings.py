@@ -10,9 +10,21 @@ from bda.bfg.app.browser.layout import ProtectedContentTile
 from bda.bfg.app.browser.form import EditForm
 from bda.bfg.ugm.model.interfaces import ISettings
 
+scope_vocab = [
+    (str(BASE), 'BASE'),
+    (str(ONELEVEL), 'ONELEVEL'),
+    (str(SUBTREE), 'SUBTREE'),
+]
+
 @tile('content', 'templates/settings.pt', interface=ISettings,
       permission='login', strict=False)
 class Settings(ProtectedContentTile):
+    
+    def scope(self, scope):
+        for term in scope_vocab:
+            if term[0] == scope:
+                return term[1]
+        return ''
     
     @property
     def ldap_status(self):
@@ -31,12 +43,6 @@ class Settings(ProtectedContentTile):
         if self.model.ldap_groups_container_valid:
             return 'OK'
         return 'Inexistent'
-
-scope_vocab = [
-    (str(BASE), 'BASE'),
-    (str(ONELEVEL), 'ONELEVEL'),
-    (str(SUBTREE), 'SUBTREE'),
-]
 
 @tile('editform', interface=ISettings, permission="edit")
 class LDAPSettingsForm(EditForm):

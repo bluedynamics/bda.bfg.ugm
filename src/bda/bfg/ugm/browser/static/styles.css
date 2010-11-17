@@ -259,6 +259,14 @@ a.delete_item {
 a.delete_item_disabled {
     background:url('/bda.bfg.ugm.static/images/icon_delete_disabled.png') 50% 50% no-repeat;
 }
+/* Settings */
+.settings td {
+	padding:2px;
+	vertical-align:top;
+}
+.attrmap {
+    width:400px;
+}
 
 /* dict widget XXX: move to yafowil.widget.dict */
 .dictwidget {

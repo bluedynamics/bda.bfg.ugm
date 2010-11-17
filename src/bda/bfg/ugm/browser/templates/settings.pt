@@ -10,7 +10,7 @@
       &nbsp;
     </a>
       
-    <table>
+    <table class="settings">
       <tr>
         <td><strong>Uri:</strong></td>
         <td tal:content="model.attrs.uri">ldap://127.0.0.1:12345</td>
@@ -29,22 +29,38 @@
       </tr>
       <tr>
         <td><strong>Users Scope:</strong></td>
-        <td tal:content="model.attrs.users_scope"></td>
+        <td tal:content="context.scope(model.attrs.users_scope)"></td>
       </tr>
       <tr>
         <td><strong>Users Query:</strong></td>
         <td tal:content="model.attrs.users_query"></td>
       </tr>
-      
-      users_attrmap
-      
+      <tr>
+        <td><strong>Users Attribute Mapping:</strong></td>
+        <td tal:define="attrmap model.attrs.users_attrmap">
+          <table class="attrmap">
+            <thead>
+              <tr>
+                <th>Application Name</th>
+                <th>LDAP Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tal:repeat="key attrmap.keys()">
+                <td tal:content="key">key</td>
+                <td tal:content="attrmap[key]">value</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
       <tr>
         <td><strong>Groups DN:</strong></td>
         <td tal:content="model.attrs.groups_dn"></td>
       </tr>
       <tr>
         <td><strong>Groups Scope:</strong></td>
-        <td tal:content="model.attrs.groups_scope"></td>
+        <td tal:content="context.scope(model.attrs.groups_scope)"></td>
       </tr>
       <tr>
         <td><strong>Groups Query:</strong></td>
