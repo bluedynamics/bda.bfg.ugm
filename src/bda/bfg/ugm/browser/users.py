@@ -4,6 +4,7 @@ from bda.bfg.tile import (
 )
 from bda.bfg.app.browser.utils import make_url
 from bda.bfg.ugm.model.interfaces import IUsers
+from.bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
 
@@ -14,10 +15,17 @@ class UsersLeftColumn(Tile):
     add_label = u"Add User"
 
 @tile('rightcolumn', interface=IUsers, permission='view')
-class UsersRightColumn(Tile):
+class UsersRightColumn(Column):
+    
+    @property
+    def current_id(self):
+        return self.request.params.get('currid')
     
     def render(self):
-        return u'<div class="right_column">&nbsp;</div>'
+        currid = self.current_id
+        if not currid:
+            return u'<div class="right_column">&nbsp;</div>'
+        return self._render(self.model[currid], 'rightcolumn')
 
 @tile('columnbatch', interface=IUsers, permission='view')
 class UsersColumnBatch(ColumnBatch):
@@ -31,7 +39,7 @@ class UsersColumnListing(ColumnListing):
     
     @property
     def current_id(self):
-        return self.request.get('_listing_current_id')
+        return self.request.params.get('currid')
     
     @property
     def items(self):

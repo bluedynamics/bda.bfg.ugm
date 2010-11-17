@@ -19,7 +19,7 @@ class GroupLeftColumn(Column):
     add_label = u"Add Group"
     
     def render(self):
-        self.request['_listing_current_id'] = self.model.__name__
+        self.request['currid'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',

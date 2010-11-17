@@ -1,3 +1,4 @@
+from paste.httpexceptions import HTTPFound
 from yafowil.base import factory
 from bda.bfg.tile import (
     tile,
@@ -22,7 +23,7 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
-        self.request['_listing_current_id'] = self.model.__name__
+        self.request['currid'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
 @tile('rightcolumn', 'templates/right_column.pt',
@@ -175,3 +176,8 @@ class UserEditForm(UserForm, EditForm):
     
     def save(self, widget, data):
         pass
+    
+    def next(self, request):
+        query = make_query(currid=self.model.__name__)
+        url = make_url(request.request, node=self.model.__parent__, query=query)
+        return HTTPFound(url)
