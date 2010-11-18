@@ -93,7 +93,6 @@ class Settings(BaseNode):
     def ldap_ucfg(self):
         if self._ldap_ucfg is None:
             config = self._config
-            # XXX: extend settings: queryfilter ??
             map = dict()
             for key in config.users_attrmap.keys():
                 map[key] = config.users_attrmap[key]
