@@ -1,6 +1,6 @@
 from bda.bfg.tile import tile
 from bda.bfg.ugm.model.interfaces import IUgm
-from.bda.bfg.ugm.browser.columns import Column
+from bda.bfg.ugm.browser.columns import Column
 
 @tile('leftcolumn', interface=IUgm, permission='view')
 class RootLeftColumn(Column):

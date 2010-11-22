@@ -1,4 +1,5 @@
 *.pyc
+.settings
 .project
 .pydevproject
 .installed.cfg

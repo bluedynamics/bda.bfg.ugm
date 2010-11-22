@@ -13,7 +13,7 @@ from bda.bfg.app.browser.form import (
     EditForm,
 )
 from bda.bfg.ugm.model.interfaces import IUser
-from.bda.bfg.ugm.browser.columns import Column
+from bda.bfg.ugm.browser.columns import Column
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
 
