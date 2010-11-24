@@ -105,7 +105,7 @@ div#footer a {
 /* box background */
 div.box,
 #form-loginform,
-#form-addform,
+#form-userform,
 #form-editform {
 	background: url('/bda.bfg.ugm.static/images/box.gif') top left no-repeat;
 	padding:12px;

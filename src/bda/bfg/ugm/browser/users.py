@@ -26,7 +26,7 @@ class UsersLeftColumn(Tile):
 class UsersRightColumn(Tile):
     
     def render(self):
-        return u'<div class="right_column">&nbsp;</div>'
+        return u'<div class="column right_column">&nbsp;</div>'
 
 @tile('columnbatch', interface=IUsers, permission='view')
 class UsersColumnBatch(ColumnBatch):

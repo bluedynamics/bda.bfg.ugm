@@ -1,5 +1,5 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
-  <div class="column right_column box">
+  <div class="column right_column">
     
     <!-- XXX: let context render editform tile - other model required -->
     <tal:batch replace="structure tile('editform')" />
