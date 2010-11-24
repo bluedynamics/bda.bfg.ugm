@@ -4,6 +4,8 @@ from bda.bfg.app.model import (
     BaseNode,
     Properties,
     BaseMetadata,
+    BaseNodeInfo,
+    registerNodeInfo,
 )
 from bda.bfg.ugm.model.interfaces import IUsers
 from bda.bfg.ugm.model.user import User
@@ -11,6 +13,8 @@ from bda.bfg.ugm.model.user import User
 class Users(BaseNode):
     
     implements(IUsers)
+    
+    node_info_name = 'users'
     
     def __init__(self, props=None, ucfg=None):
         """``props`` and `ucfg`` just needed for testing. never used in
@@ -71,3 +75,10 @@ class Users(BaseNode):
             user = User(self.ldap_users[name], name, self)
             self[name] = user
             return user
+
+info = BaseNodeInfo()
+info.title = 'Users'
+info.description = 'Users Container.'
+info.node = Users
+info.addables = ['user']
+registerNodeInfo('users', info)

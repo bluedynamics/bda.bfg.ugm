@@ -2,7 +2,10 @@ from bda.bfg.tile import (
     tile,
     Tile,
 )
-from bda.bfg.app.browser.utils import make_url
+from bda.bfg.app.browser.utils import (
+    make_url,
+    make_query,
+)
 from bda.bfg.ugm.model.interfaces import IUsers
 from bda.bfg.ugm.browser.batch import ColumnBatch
 from bda.bfg.ugm.browser.listing import ColumnListing
@@ -12,6 +15,12 @@ from bda.bfg.ugm.browser.listing import ColumnListing
 class UsersLeftColumn(Tile):
     
     add_label = u"Add User"
+    
+    @property
+    def add_target(self):
+        return make_url(self.request,
+                        node=self.model.root['users'],
+                        query=make_query(factory=u'user'))
 
 @tile('rightcolumn', interface=IUsers, permission='view')
 class UsersRightColumn(Tile):

@@ -9,12 +9,16 @@ from bda.bfg.app.model import (
     AdapterNode,
     Properties,
     BaseMetadata,
+    BaseNodeInfo,
+    registerNodeInfo,
 )
 from bda.bfg.ugm.model.interfaces import IUser
 
 class User(AdapterNode):
     
     implements(IUser)
+    
+    node_info_name = 'user'
     
     __acl__ = [
         (Allow, 'group:authenticated', 'view'),
@@ -38,3 +42,10 @@ class User(AdapterNode):
     
     def __call__(self):
         self.model()
+
+info = BaseNodeInfo()
+info.title = 'User'
+info.description = 'User'
+info.node = User
+info.addables = []
+registerNodeInfo('user', info)

@@ -1,5 +1,8 @@
 from paste.httpexceptions import HTTPFound
-from yafowil.base import factory
+from yafowil.base import (
+    factory,
+    UNSET,
+)
 from bda.bfg.tile import (
     tile,
     Tile,
@@ -118,7 +121,7 @@ class UserForm(object):
     
     @property
     def form(self):
-        resource='add'
+        resource = 'add'
         if self.model.__name__ is not None:
             resource = 'edit'
         action = make_url(self.request, node=self.model, resource=resource)
@@ -138,11 +141,14 @@ class UserForm(object):
             }
             if key in ['userPassword']:
                 props['required'] = 'No %s defined' % val
-            if key in ['uid']:
+            if key in ['uid'] and resource == 'edit':
                 props['mode'] = 'display'
+            value = UNSET
+            if resource == 'edit':
+                value = self.model.attrs.get(key, '')
             form[key] = factory(
                 chain,
-                value = self.model.attrs.get(key, ''),
+                value = value,
                 props = props
             )
         form['save'] = factory(
