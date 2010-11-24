@@ -13,7 +13,8 @@
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
       <script src="http://cdn.jquerytools.org/1.1.2/tiny/jquery.tools.min.js"></script>
     </tal:cdn>
-    <script src="${request.application_url}/static/cdn/jquery.min.js"></script> 
+    <script src="${request.application_url}/static/cdn/jquery.min.js"></script>
+    <script src="${request.application_url}/static/cdn/jquery.form.js"></script> 
     <script src="${request.application_url}/static/cdn/jquery.tools.min.js"></script>
     <script src="${request.application_url}/++resource++bdajax/bdajax.js"></script>
     
