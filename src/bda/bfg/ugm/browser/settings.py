@@ -94,6 +94,7 @@ class LDAPSettingsForm(EditForm):
                 'label': 'Users query',
             })
         users_attrmap = odict()
+        users_attrmap['rdn'] = self.model.attrs.users_attrmap.get('rdn')
         users_attrmap['id'] = self.model.attrs.users_attrmap.get('id')
         users_attrmap['login'] = self.model.attrs.users_attrmap.get('login')
         form['users_attrmap'] = factory(

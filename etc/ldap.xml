@@ -7,6 +7,10 @@
   <users_query></users_query>
   <users_attrmap>
     <elem>
+      <key>rdn</key>
+      <value>uid</value>
+    </elem>
+    <elem>
       <key>id</key>
       <value>uid</value>
     </elem>
