@@ -8,7 +8,7 @@
                value="${context.add_label}"
                ajax:bind="click"
                ajax:target="${context.add_target}"
-               ajax:action="add:.right_column:inner" />
+               ajax:action="add:#content:inner" />
       </form>
     </div>
   
