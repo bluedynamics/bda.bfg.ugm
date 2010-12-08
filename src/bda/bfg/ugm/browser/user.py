@@ -185,11 +185,16 @@ class UserAddForm(UserForm, AddForm):
         for key, val in attrmap.items():
             user.attrs[key] = data.fetch('userform.%s' % key).extracted
         users = self.model.__parent__.ldap_users
-        users[user.attrs['id']] = user
+        id = user.attrs['id']
+        self.next_resource = id
+        users[id] = user
         users.context()
     
      def next(self, request):
-        return HTTPFound(make_url(request.request, node=self.model))
+        url = make_url(request.request,
+                       node=self.model,
+                       resource=self.next_resource)
+        return HTTPFound(url)
 
 @tile('editform', interface=IUser, permission="view")
 class UserEditForm(UserForm, EditForm):
