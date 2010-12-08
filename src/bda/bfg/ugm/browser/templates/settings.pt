@@ -48,6 +48,10 @@
         <td tal:content="model.attrs.users_query"></td>
       </tr>
       <tr>
+        <td class="left_col"><strong>Users Object Classes:</strong></td>
+        <td tal:content="', '.join(model.attrs.get('users_object_classes', []))"></td>
+      </tr>
+      <tr>
         <td class="left_col"><strong>Users Attribute Mapping:</strong></td>
         <td tal:define="attrmap model.attrs.users_attrmap">
           <table class="attrmap">

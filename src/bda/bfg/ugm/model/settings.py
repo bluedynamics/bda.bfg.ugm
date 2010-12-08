@@ -97,9 +97,13 @@ class Settings(BaseNode):
             for key in config.users_attrmap.keys():
                 map[key] = config.users_attrmap[key]
             for key in config.users_form_attrmap.keys():
+                if key in ['id', 'login']:
+                    continue
                 map[key] = key
-            self._ldap_ucfg = LDAPUsersConfig(baseDN=config.users_dn,
-                                              attrmap=map,
-                                              scope=int(config.users_scope),
-                                              queryFilter=config.users_query)
+            self._ldap_ucfg = LDAPUsersConfig(
+                baseDN=config.users_dn,
+                attrmap=map,
+                scope=int(config.users_scope),
+                queryFilter=config.users_query,
+                objectClasses=config.users_object_classes)
         return self._ldap_ucfg

@@ -5,6 +5,9 @@
   <users_dn>ou=users300,dc=my-domain,dc=com</users_dn>
   <users_scope>1</users_scope>
   <users_query></users_query>
+  <users_object_classes>
+    <item>inetOrgPerson</item>
+  </users_object_classes>
   <users_attrmap>
     <elem>
       <key>rdn</key>
@@ -24,7 +27,11 @@
   <groups_query></groups_query>
   <users_form_attrmap>
     <elem>
-      <key>uid</key>
+      <key>id</key>
+      <value>Id</value>
+    </elem>
+    <elem>
+      <key>login</key>
       <value>Login</value>
     </elem>
     <elem>

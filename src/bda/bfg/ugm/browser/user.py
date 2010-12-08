@@ -1,4 +1,6 @@
+from odict import odict
 from paste.httpexceptions import HTTPFound
+from zodict import AttributedNode
 from yafowil.base import (
     factory,
     UNSET,
@@ -26,6 +28,7 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
+        print self.model
         self.request['_curr_listing_id'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
@@ -141,7 +144,7 @@ class UserForm(object):
             }
             if key in ['userPassword']:
                 props['required'] = 'No %s defined' % val
-            if key in ['uid'] and resource == 'edit':
+            if key in ['id', 'login'] and resource == 'edit':
                 props['mode'] = 'display'
             value = UNSET
             if resource == 'edit':
@@ -168,6 +171,7 @@ class UserForm(object):
                     'expression': True,
                     'next': self.next,
                     'label': 'Cancel',
+                    'skip': True,
                 })
         return form
 
@@ -175,7 +179,17 @@ class UserForm(object):
 class UserAddForm(UserForm, AddForm):
     
      def save(self, widget, data):
-        pass
+        settings = self.model.root['settings']
+        attrmap = settings.attrs.users_form_attrmap
+        user = AttributedNode()
+        for key, val in attrmap.items():
+            user.attrs[key] = data.fetch('userform.%s' % key).extracted
+        users = self.model.__parent__.ldap_users
+        users[user.attrs['id']] = user
+        users.context()
+    
+     def next(self, request):
+        return HTTPFound(make_url(request.request, node=self.model))
 
 @tile('editform', interface=IUser, permission="view")
 class UserEditForm(UserForm, EditForm):
@@ -184,5 +198,4 @@ class UserEditForm(UserForm, EditForm):
         pass
     
     def next(self, request):
-        url = make_url(request.request, node=self.model)
-        return HTTPFound(url)
+        return HTTPFound(make_url(request.request, node=self.model))

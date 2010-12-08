@@ -49,54 +49,61 @@ class LDAPSettingsForm(EditForm):
     
     @property
     def form(self):
+        model = self.model
         form = factory(u'form',
                        name='editform',
                        props={'action': '%s/edit' % self.nodeurl})
         form['uri'] = factory(
             'field:label:error:text',
-            value = self.model.attrs.uri,
+            value = model.attrs.uri,
             props = {
                 'required': 'No URI defined',
                 'label': 'LDAP URI',
             })
         form['user'] = factory(
             'field:label:error:text',
-            value = self.model.attrs.user,
+            value = model.attrs.user,
             props = {
                 'required': 'No user defined',
                 'label': 'LDAP Manager User',
             })
         form['password'] = factory(
             'field:label:error:password',
-            value = self.model.attrs.password,
+            value = model.attrs.password,
             props = {
                 'required': 'No password defined',
                 'label': 'LDAP Manager Password',
             })
         form['users_dn'] = factory(
             'field:label:error:text',
-            value = self.model.attrs.users_dn,
+            value = model.attrs.users_dn,
             props = {
                 'required': 'No Users DN defined',
                 'label': 'Users Base DN',
             })
         form['users_scope'] = factory(
             'field:label:select',
-            value = self.model.attrs.users_scope,
+            value = model.attrs.users_scope,
             props = {
                 'label': 'Users scope',
                 'vocabulary': scope_vocab,
             })
         form['users_query'] = factory(
             'field:label:text',
-            value = self.model.attrs.users_query,
+            value = model.attrs.users_query,
             props = {
                 'label': 'Users query',
             })
+        form['users_object_classes'] = factory(
+            'field:label:text',
+            value = u', '.join(model.attrs.get('users_object_classes', [])),
+            props = {
+                'label': 'Users object classes',
+            })
         users_attrmap = odict()
-        users_attrmap['rdn'] = self.model.attrs.users_attrmap.get('rdn')
-        users_attrmap['id'] = self.model.attrs.users_attrmap.get('id')
-        users_attrmap['login'] = self.model.attrs.users_attrmap.get('login')
+        users_attrmap['rdn'] = model.attrs.users_attrmap.get('rdn')
+        users_attrmap['id'] = model.attrs.users_attrmap.get('id')
+        users_attrmap['login'] = model.attrs.users_attrmap.get('login')
         form['users_attrmap'] = factory(
             'field:label:error:dict',
             value = users_attrmap,
@@ -111,7 +118,7 @@ class LDAPSettingsForm(EditForm):
             })
         form['users_form_attrmap'] = factory(
             'field:label:dict',
-            value = self.model.attrs.users_form_attrmap,
+            value = model.attrs.users_form_attrmap,
             props = {
                 'label': 'User form attribute mapping',
                 'head': {
@@ -123,21 +130,21 @@ class LDAPSettingsForm(EditForm):
         # XXX: later
 #        form['groups_dn'] = factory(
 #            'field:label:error:text',
-#            value = self.model.attrs.groups_dn,
+#            value = model.attrs.groups_dn,
 #            props = {
 #                'required': 'No Groups DN defined',
 #                'label': 'Groups Base DN',
 #            })
 #        form['groups_scope'] = factory(
 #            'field:label:select',
-#            value = self.model.attrs.groups_scope,
+#            value = model.attrs.groups_scope,
 #            props = {
 #                'label': 'Groups scope',
 #                'vocabulary': scope_vocab,
 #            })
 #        form['groups_query'] = factory(
 #            'field:label:text',
-#            value = self.model.attrs.groups_query,
+#            value = model.attrs.groups_query,
 #            props = {
 #                'label': 'Groups query',
 #            })
@@ -164,10 +171,13 @@ class LDAPSettingsForm(EditForm):
     
     def save(self, widget, data):
         # XXX: groups stuff -> 'groups_dn', 'groups_scope', 'groups_query'
+        model = self.model
         for attr_name in ['uri', 'user', 'password', 'users_dn', 'users_scope',
-                          'users_query', 'users_attrmap', 'users_form_attrmap']:
-            setattr(self.model.attrs,
-                    attr_name,
-                    data.fetch('editform.%s' % attr_name).extracted)
-        self.model()
-        self.model.invalidate()
+                          'users_query', 'users_object_classes',
+                          'users_attrmap', 'users_form_attrmap']:
+            val = data.fetch('editform.%s' % attr_name).extracted
+            if attr_name in ['users_object_classes']:
+                val = [v.strip() for v in val.split(',') if v.strip()]
+            setattr(model.attrs, attr_name, val)
+        model()
+        model.invalidate()
