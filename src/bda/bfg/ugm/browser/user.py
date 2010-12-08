@@ -28,7 +28,6 @@ class UserLeftColumn(Column):
     add_label = u"Add User"
     
     def render(self):
-        print self.model
         self.request['_curr_listing_id'] = self.model.__name__
         return self._render(self.model.__parent__, 'leftcolumn')
 
@@ -128,9 +127,10 @@ class UserForm(object):
         if self.model.__name__ is not None:
             resource = 'edit'
         action = make_url(self.request, node=self.model, resource=resource)
-        form = factory(u'form',
-                       name='userform',
-                       props={'action': action})
+        form = factory(
+            u'form',
+            name='userform',
+            props={'action': action})
         settings = self.model.root['settings']
         attrmap = settings.attrs.users_form_attrmap
         if not attrmap:
@@ -152,8 +152,7 @@ class UserForm(object):
             form[key] = factory(
                 chain,
                 value = value,
-                props = props
-            )
+                props = props)
         form['save'] = factory(
             'submit',
             props = {
@@ -178,7 +177,7 @@ class UserForm(object):
 @tile('addform', interface=IUser, permission="view")
 class UserAddForm(UserForm, AddForm):
     
-     def save(self, widget, data):
+    def save(self, widget, data):
         settings = self.model.root['settings']
         attrmap = settings.attrs.users_form_attrmap
         user = AttributedNode()
@@ -190,17 +189,26 @@ class UserAddForm(UserForm, AddForm):
         users[id] = user
         users.context()
     
-     def next(self, request):
-        url = make_url(request.request,
-                       node=self.model,
-                       resource=self.next_resource)
+    def next(self, request):
+        if hasattr(self, 'next_resource'):
+            url = make_url(request.request,
+                           node=self.model,
+                           resource=self.next_resource)
+        else:
+            url = make_url(request.request, node=self.model)
         return HTTPFound(url)
 
 @tile('editform', interface=IUser, permission="view")
 class UserEditForm(UserForm, EditForm):
     
     def save(self, widget, data):
-        pass
+        settings = self.model.root['settings']
+        attrmap = settings.attrs.users_form_attrmap
+        for key, val in attrmap.items():
+            if key in ['id', 'login']:
+                continue
+            self.model.attrs[key] = data.fetch('userform.%s' % key).extracted
+        self.model.model.context() # XXX
     
     def next(self, request):
         return HTTPFound(make_url(request.request, node=self.model))
