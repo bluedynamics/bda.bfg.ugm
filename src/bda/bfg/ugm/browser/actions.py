@@ -38,12 +38,22 @@ class DeleteUserAction(Action):
     def __call__(self):
         """Delete user from database.
         """
-        #parent = self.model.__parent__
-        #del parent[self.model.__name__]
-        #parent()
+        user = self.model.model.context
+        user_id = user.__name__
+        user_container = user.__parent__
+        del user_container[user_id]
+        try:
+            user_container()
+        except Exception, e:
+            return {
+                'success': False,
+                'message': str(e),
+            }
+        parent = self.model.__parent__
+        del parent[self.model.__name__]
         return {
             'success': True,
-            'message': 'Deleted user from database',
+            'message': 'Deleted user %s from database' % user_id,
         }
 
 @bfg_view(name='add_item', accept='application/json',
