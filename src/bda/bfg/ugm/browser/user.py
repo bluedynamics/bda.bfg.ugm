@@ -169,6 +169,10 @@ class UserForm(object):
         resource = 'add'
         if self.model.__name__ is not None:
             resource = 'edit'
+            
+            # XXX: tmp - load props each time they are accessed.
+            self.model.attrs.context.load()
+            
         action = make_url(self.request, node=self.model, resource=resource)
         form = factory(
             u'form',

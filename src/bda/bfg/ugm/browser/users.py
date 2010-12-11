@@ -50,6 +50,10 @@ class UsersColumnListing(ColumnListing):
                               node=self.model,
                               resource=key)
             attrs = self.model[key].attrs
+            
+            # XXX: tmp - load props each time they are accessed.
+            attrs.context.load()
+            
             # XXX: from config
             head = '%s %s %s' % (attrs.get('cn'),
                                  attrs.get('sn'),
