@@ -31,10 +31,6 @@
       <value>Id</value>
     </elem>
     <elem>
-      <key>login</key>
-      <value>Login</value>
-    </elem>
-    <elem>
       <key>userPassword</key>
       <value>Password</value>
     </elem>

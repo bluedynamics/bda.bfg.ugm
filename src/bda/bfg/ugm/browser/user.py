@@ -5,6 +5,7 @@ from yafowil.base import (
     factory,
     UNSET,
 )
+from yafowil.common import ascii_extractor
 from bda.bfg.tile import (
     tile,
     Tile,
@@ -122,6 +123,48 @@ class AllUserColumnListing(ColumnListing):
 class UserForm(object):
     
     @property
+    def schema(self):
+        # XXX: info from LDAP Schema.
+        return {
+            'id': {
+                'chain': 'field:*ascii:error:label:mode:text',
+                'props': {
+                    'ascii': True,
+                },
+                'custom': {
+                    'ascii': ([ascii_extractor], [], [], []),
+                },
+            },
+            'login': {
+                'chain': 'field:*ascii:error:label:mode:text',
+                'props': {
+                    'ascii': True,
+                },
+                'custom': {
+                    'ascii': ([ascii_extractor], [], [], []),
+                },
+            },
+            'mail': {
+                'chain': 'field:error:label:mode:email',
+            },
+            'userPassword': {
+                'chain': 'field:error:label:password',
+                'props': {
+                    'minlength': 6,
+                    'ascii': True,
+                },
+            },
+        }
+    
+    @property
+    def _protected_fields(self):
+        return ['id', 'login']
+    
+    @property
+    def _required_fields(self):
+        return ['id', 'login', 'cn', 'sn', 'mail', 'userPassword']
+    
+    @property
     def form(self):
         resource = 'add'
         if self.model.__name__ is not None:
@@ -135,24 +178,28 @@ class UserForm(object):
         attrmap = settings.attrs.users_form_attrmap
         if not attrmap:
             return form
+        schema = self.schema
+        required = self._required_fields
+        protected = self._protected_fields
+        default_chain = 'field:error:label:mode:text'
         for key, val in attrmap.items():
-            chain = 'field:error:label:mode:text'
-            if key == 'userPassword':
-                chain = 'field:error:label:password'
-            props = {
-                'label': val,
-            }
-            if key in ['userPassword']:
+            field = schema.get(key, dict())
+            chain = field.get('chain', default_chain)
+            props = dict()
+            props['label'] = val
+            if key in required:
                 props['required'] = 'No %s defined' % val
-            if key in ['id', 'login'] and resource == 'edit':
-                props['mode'] = 'display'
+            props.update(field.get('props', dict()))
             value = UNSET
             if resource == 'edit':
-                value = self.model.attrs.get(key, '')
+                if key in protected:
+                    props['mode'] = 'display'
+                value = self.model.attrs.get(key, u'')
             form[key] = factory(
                 chain,
-                value = value,
-                props = props)
+                value=value,
+                props=props,
+                custom=field.get('custom', dict()))
         form['save'] = factory(
             'submit',
             props = {
@@ -182,7 +229,10 @@ class UserAddForm(UserForm, AddForm):
         attrmap = settings.attrs.users_form_attrmap
         user = AttributedNode()
         for key, val in attrmap.items():
-            user.attrs[key] = data.fetch('userform.%s' % key).extracted
+            val = data.fetch('userform.%s' % key).extracted
+            if not val:
+                continue
+            user.attrs[key] = val
         users = self.model.__parent__.ldap_users
         id = user.attrs['id']
         self.next_resource = id
