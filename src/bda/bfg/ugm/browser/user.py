@@ -259,10 +259,15 @@ class UserEditForm(UserForm, EditForm):
         settings = self.model.root['settings']
         attrmap = settings.attrs.users_form_attrmap
         for key, val in attrmap.items():
-            if key in ['id', 'login']:
+            if key in ['id', 'login', 'userPassword']:
                 continue
-            self.model.attrs[key] = data.fetch('userform.%s' % key).extracted
-        self.model.model.context() # XXX
+            extracted = data.fetch('userform.%s' % key).extracted
+            self.model.attrs[key] = extracted
+        self.model.model.context()
+        password = data.fetch('userform.userPassword').extracted
+        if password is not UNSET:
+            id = self.model.__name__
+            self.model.__parent__.ldap_users.passwd(id, None, extracted)
     
     def next(self, request):
         return HTTPFound(make_url(request.request, node=self.model))
