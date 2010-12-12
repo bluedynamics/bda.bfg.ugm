@@ -64,21 +64,15 @@ class UserColumnListing(ColumnListing):
 #                'target': item_target,
 #                'head': 'User in Group - Group %i' % i,
 #                'current': False,
-#                'actions': [
-#                    {
-#                        'id': 'add_item',
-#                        'enabled': False,
-#                        'title': 'Add selected User to Group',
-#                        'target': action_target,
-#                    },
-#                    {
-#                        'id': 'remove_item',
-#                        'enabled': True,
-#                        'title': 'Remove selected User from Group',
-#                        'target': action_target,
-#                    },
-#                ],
-#            })
+#                'actions': [{
+#                    'id': 'add_item',
+#                    'enabled': False,
+#                    'title': 'Add selected User to Group',
+#                    'target': action_target},
+#                    {'id': 'remove_item',
+#                    'enabled': True,
+#                    'title': 'Remove selected User from Group',
+#                    'target': action_target}]})
 #        return ret
 
 @tile('allcolumnlisting', 'templates/column_listing.pt',
@@ -103,21 +97,15 @@ class AllUserColumnListing(ColumnListing):
                 'target': item_target,
                 'head': 'User in Group - Group %i' % i,
                 'current': False,
-                'actions': [
-                    {
-                        'id': 'add_item',
-                        'enabled': False,
-                        'title': 'Add selected User to Group',
-                        'target': action_target,
-                    },
-                    {
-                        'id': 'remove_item',
-                        'enabled': True,
-                        'title': 'Remove selected User from Group',
-                        'target': action_target,
-                    },
-                ],
-            })
+                'actions': [{
+                    'id': 'add_item',
+                    'enabled': False,
+                    'title': 'Add selected User to Group',
+                    'target': action_target},
+                    {'id': 'remove_item',
+                    'enabled': True,
+                    'title': 'Remove selected User from Group',
+                    'target': action_target}]})
         return ret
 
 class UserForm(object):
@@ -129,32 +117,23 @@ class UserForm(object):
             'id': {
                 'chain': 'field:*ascii:error:label:mode:text',
                 'props': {
-                    'ascii': True,
-                },
+                    'ascii': True},
                 'custom': {
-                    'ascii': ([ascii_extractor], [], [], []),
-                },
-            },
+                    'ascii': ([ascii_extractor], [], [], [])}},
             'login': {
                 'chain': 'field:*ascii:error:label:mode:text',
                 'props': {
-                    'ascii': True,
-                },
+                    'ascii': True},
                 'custom': {
-                    'ascii': ([ascii_extractor], [], [], []),
-                },
-            },
+                    'ascii': ([ascii_extractor], [], [], [])}},
             'mail': {
-                'chain': 'field:error:label:mode:email',
-            },
+                'chain': 'field:error:label:mode:email'},
             'userPassword': {
                 'chain': 'field:error:label:password',
                 'props': {
                     'minlength': 6,
                     'ascii': True,
-                },
-            },
-        }
+                    'strength': 2}}}
     
     @property
     def _protected_fields(self):
@@ -242,6 +221,9 @@ class UserAddForm(UserForm, AddForm):
         self.next_resource = id
         users[id] = user
         users.context()
+        password = data.fetch('userform.userPassword').extracted
+        if password is not UNSET:
+            users.passwd(id, None, password)
     
     def next(self, request):
         if hasattr(self, 'next_resource'):
@@ -267,7 +249,7 @@ class UserEditForm(UserForm, EditForm):
         password = data.fetch('userform.userPassword').extracted
         if password is not UNSET:
             id = self.model.__name__
-            self.model.__parent__.ldap_users.passwd(id, None, extracted)
+            self.model.__parent__.ldap_users.passwd(id, None, password)
     
     def next(self, request):
         return HTTPFound(make_url(request.request, node=self.model))

@@ -4,7 +4,10 @@ from bda.ldap.scope import (
     ONELEVEL,
     SUBTREE,
 )
-from yafowil.base import factory
+from yafowil.base import (
+    factory,
+    UNSET,
+)
 from bda.bfg.tile import tile
 from bda.bfg.app.browser.layout import ProtectedContentTile
 from bda.bfg.app.browser.form import EditForm
@@ -172,12 +175,15 @@ class LDAPSettingsForm(EditForm):
     def save(self, widget, data):
         # XXX: groups stuff -> 'groups_dn', 'groups_scope', 'groups_query'
         model = self.model
-        for attr_name in ['uri', 'user', 'password', 'users_dn', 'users_scope',
+        for attr_name in ['uri', 'user', 'users_dn', 'users_scope',
                           'users_query', 'users_object_classes',
                           'users_attrmap', 'users_form_attrmap']:
             val = data.fetch('editform.%s' % attr_name).extracted
             if attr_name in ['users_object_classes']:
                 val = [v.strip() for v in val.split(',') if v.strip()]
             setattr(model.attrs, attr_name, val)
+        password = data.fetch('editform.password').extracted
+        if password is not UNSET:
+            setattr(model.attrs, 'password', password)
         model()
         model.invalidate()
