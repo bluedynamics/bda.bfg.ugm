@@ -1,16 +1,27 @@
+/* 
+ * ugm JS
+ * 
+ * Requires: bdajax
+ */
+
 (function($) {
     
     $(document).ready(function() {
+        // initial binding
         ugm.left_listing_nav_binder();
         ugm.right_listing_nav_binder();
         ugm.listing_filter_binder();
         ugm.listing_actions_binder();
         ugm.listing_related_binder();
-        bdajax.binders.left_listing_nav_binder = ugm.left_listing_nav_binder;
-        bdajax.binders.right_listing_nav_binder = ugm.right_listing_nav_binder;
-        bdajax.binders.listing_filter_binder = ugm.listing_filter_binder;
-        bdajax.binders.listing_actions_binder = ugm.listing_actions_binder;
-        bdajax.binders.listing_related_binder = ugm.listing_related_binder;
+        
+        // add after ajax binding to bdajax
+        $.extend(bdajax.binders, {
+            left_listing_nav_binder: ugm.left_listing_nav_binder,
+            right_listing_nav_binder: ugm.right_listing_nav_binder,
+            listing_filter_binder: ugm.listing_filter_binder,
+            listing_actions_binder: ugm.listing_actions_binder,
+            listing_related_binder: ugm.listing_related_binder
+        });
     });
     
     ugm = {
