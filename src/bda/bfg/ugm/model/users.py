@@ -55,6 +55,7 @@ class Users(BaseNode):
 
     def invalidate(self):
         self._ldap_users = None
+        self.clear()
 
     def __iter__(self):
         try:
