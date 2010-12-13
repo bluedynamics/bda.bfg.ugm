@@ -11,6 +11,7 @@
         ugm.left_listing_nav_binder();
         ugm.right_listing_nav_binder();
         ugm.listing_filter_binder();
+        ugm.listing_sort_binder();
         ugm.listing_actions_binder();
         ugm.listing_related_binder();
         ugm.scroll_listings_to_selected();
@@ -20,6 +21,7 @@
             left_listing_nav_binder: ugm.left_listing_nav_binder,
             right_listing_nav_binder: ugm.right_listing_nav_binder,
             listing_filter_binder: ugm.listing_filter_binder,
+            listing_sort_binder: ugm.listing_sort_binder,
             listing_actions_binder: ugm.listing_actions_binder,
             listing_related_binder: ugm.listing_related_binder
         });
@@ -303,6 +305,30 @@
                     }
                 }
             }
+        },
+        
+        // asc / desc sorting of listings
+        listing_sort: function(a, b) {
+            var a_val = $('head', a).text().toLowerCase();
+            var b_val = $('head', b).text().toLowerCase();
+            return a_val > b_val ? -1 : 1;
+        },
+        
+        // sort listings binder
+        listing_sort_binder: function(context) {
+            $('.columnsorting a', context)
+                .unbind()
+                .bind('click', function(event) {
+                    event.preventDefault();
+                    var elem = $(this);
+                    var cont = $('.columnlisting', elem.parent().parent());
+                    var sorted = $('ul li', cont).sort(ugm.listing_sort);
+                    $('ul', cont).empty().append(sorted);
+                    ugm.left_listing_nav_binder(cont);
+                    ugm.right_listing_nav_binder(cont);
+                    ugm.listing_actions_binder(cont);
+                    ugm.scroll_listings_to_selected();
+                });
         }
     };
     

@@ -1,5 +1,9 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
   
+  <div class="columnsorting">
+    <a href="" class="sort_asc">&nbsp;</a>
+  </div>
+  
   <div class="columnlisting">
     
     <ul class="${context.slot}">
