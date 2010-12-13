@@ -68,8 +68,7 @@ class UsersColumnListing(ColumnListing):
                         'id': 'delete_item',
                         'enabled': True,
                         'title': 'Delete User',
-                        'target': target,
-                    }
-                ],
-            })
+                        'target': target}]})
+        cmp = lambda x, y:x['head'].lower() > y['head'].lower() and 1 or -1
+        ret = sorted(ret, cmp=cmp)
         return ret

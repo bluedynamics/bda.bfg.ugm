@@ -106,6 +106,8 @@ class AllUserColumnListing(ColumnListing):
                     'enabled': True,
                     'title': 'Remove selected User from Group',
                     'target': action_target}]})
+        cmp = lambda x, y:x['head'].lower() > y['head'].lower() and 1 or -1
+        ret = sorted(ret, cmp=cmp)
         return ret
 
 class UserForm(object):

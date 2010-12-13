@@ -13,6 +13,7 @@
         ugm.listing_filter_binder();
         ugm.listing_actions_binder();
         ugm.listing_related_binder();
+        ugm.scroll_listings_to_selected();
         
         // add after ajax binding to bdajax
         $.extend(bdajax.binders, {
@@ -278,6 +279,30 @@
                 url: target.url,
                 params: target.params
             });
+        },
+        
+        // scroll column listings to selected items
+        scroll_listings_to_selected: function() {
+            ugm.scroll_to_selected('.selected', $('ul.leftlisting'));
+            ugm.scroll_to_selected('.selected', $('ul.rightlisting'));
+        },
+        
+        // scroll listing parent to element found by selector
+        scroll_to_selected: function(selector, listing) {
+            var elem = $(selector, listing);
+            if (elem.length) {
+                var container = listing.parent();
+                var listing_h = listing.height();
+                var container_h = container.height();
+                if (listing_h > container_h) {
+                    var range_y = listing_h - container_h;
+                    var sel_y = elem.position().top - container_h;
+                    var sel_h = elem.height();
+                    if (sel_y > 0) {
+                        container.scrollTop(sel_y + sel_h);
+                    }
+                }
+            }
         }
     };
     
