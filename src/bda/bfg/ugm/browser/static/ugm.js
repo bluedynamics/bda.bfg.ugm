@@ -296,6 +296,7 @@
                 var container = listing.parent();
                 var listing_h = listing.height();
                 var container_h = container.height();
+                container.scrollTop(0);
                 if (listing_h > container_h) {
                     var range_y = listing_h - container_h;
                     var sel_y = elem.position().top - container_h;

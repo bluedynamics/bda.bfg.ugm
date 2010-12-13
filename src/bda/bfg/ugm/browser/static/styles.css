@@ -154,8 +154,19 @@ div.column .batch strong {
 	color:#333;
 }
 /* column listing */
+div.columnsorting {
+	padding-top:6px;
+	padding-bottom:6px;
+	text-align:right;
+}
+div.columnsorting a {
+	color:#333;
+	cursor:pointer;
+	text-decoration:none;
+	font-size:80%;
+	font-weight:bold;
+}
 div.columnlisting {
-	margin-top:12px;
 	border-left:#ccc 1px solid;
 	border-bottom:#ccc 1px solid;
 	height:450px;
