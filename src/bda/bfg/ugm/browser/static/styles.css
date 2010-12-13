@@ -183,6 +183,7 @@ div.columnlisting div.head {
 	width:420px;
 	overflow:hidden;
 	padding:2px;
+	cursor:pointer;
 }
 div.columnlisting div.actions {
 	float:right;
