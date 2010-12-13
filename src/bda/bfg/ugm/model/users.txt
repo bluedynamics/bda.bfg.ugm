@@ -55,7 +55,7 @@ The attributes of the user are wrapped.
     >>> user0.attrs.items()
     [('cn', u'cn0'),
      ('sn', u'sn0'),
-     ('mail', u'uid0@users300'),
+     ('mail', u'uid0@users300.my-domain.com'),
      ('login', u'uid0')]
 
     >>> user0.attrs['mail'] = 'foo'
@@ -72,5 +72,5 @@ The attributes of the user are wrapped.
     u'foo'
 
     >>> del user0.attrs['mail']
-    >>> user0.attrs['mail'] = 'uid0@users300'
+    >>> user0.attrs['mail'] = 'uid0@users300.my-domain.com'
     >>> user0.model.context()
