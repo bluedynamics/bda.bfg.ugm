@@ -299,7 +299,8 @@ td.left_col {
 #form-userform input {
 	width: 230px;
 }
-#form-userform #input-userform-save {
+#form-userform #input-userform-save,
+#form-userform #input-userform-cancel {
     width: 100px;
 }
 
