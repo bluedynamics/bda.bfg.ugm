@@ -295,6 +295,13 @@ td.left_col {
 	text-align:right;
 }
 
+/*user form */
+#form-userform input {
+	width: 230px;
+}
+#form-userform #input-userform-save {
+    width: 100px;
+}
 
 /* dict widget XXX: move to yafowil.widget.dict */
 .dictwidget {
