@@ -1,7 +1,9 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
   
   <div class="columnsorting">
-    <a href="" class="reverse_order">reverse</a>
+    <a href="" class="sort_name">name</a>&nbsp;|&nbsp;
+    <a href="" class="sort_surname">surname</a>&nbsp;|&nbsp;
+    <a href="" class="sort_email">email</a>
   </div>
   
   <div class="columnlisting">
@@ -11,7 +13,7 @@
         <li ajax:target="${item['target']}"
             tal:attributes="class item['current'] and 'selected' or None">
           <div class="head li_trigger"
-               tal:content="item['head']">head</div>
+               tal:content="structure item['head']">head</div>
           <div class="actions">
             <tal:action repeat="action item['actions']">
               <tal:enabled condition="action['enabled']">

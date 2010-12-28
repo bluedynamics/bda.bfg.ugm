@@ -157,7 +157,6 @@ div.column .batch strong {
 div.columnsorting {
 	padding-top:6px;
 	padding-bottom:6px;
-	text-align:right;
 }
 div.columnsorting a {
 	color:#333;
@@ -195,6 +194,8 @@ div.columnlisting div.head {
 	overflow:hidden;
 	padding:2px;
 	cursor:pointer;
+}
+div.columnlisting div.head span {
 }
 div.columnlisting div.actions {
 	float:right;

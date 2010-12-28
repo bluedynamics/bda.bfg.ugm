@@ -309,27 +309,47 @@
         },
         
         // asc / desc sorting of listings
-        listing_sort: function(a, b) {
-            var a_val = $('head', a).text().toLowerCase();
-            var b_val = $('head', b).text().toLowerCase();
-            return a_val > b_val ? -1 : 1;
+        listing_sort_func: function(name, inv) {
+            var sel = '.' + name;
+            var inverse = inv;
+            var func = function(a, b) {
+                var a_val = $(sel, a).text().toLowerCase();
+                var b_val = $(sel, b).text().toLowerCase();
+                if (inverse) {
+                    return a_val > b_val ? -1 : 1;
+                } else {
+                    return a_val > b_val ? 1 : -1;
+                }
+            }
+            return func;
         },
         
         // sort listings binder
         listing_sort_binder: function(context) {
-            $('.columnsorting a', context)
+            var sort_links = $('.columnsorting a', context)
                 .unbind()
                 .bind('click', function(event) {
                     event.preventDefault();
                     var elem = $(this);
                     var cont = $('.columnlisting', elem.parent().parent());
-                    var sorted = $('ul li', cont).sort(ugm.listing_sort);
+                    var inv = false;
+                    if (elem.hasClass('inv')) {
+                        inv = true;
+                        elem.removeClass('inv');
+                    }
+                    var sortname = elem.attr('class');
+                    if (!inv) {
+                        elem.addClass('inv');
+                    }
+                    var sortfunc = ugm.listing_sort_func(sortname, inv);
+                    var sorted = $('ul li', cont).sort(sortfunc);
                     $('ul', cont).empty().append(sorted);
                     ugm.left_listing_nav_binder(cont);
                     ugm.right_listing_nav_binder(cont);
                     ugm.listing_actions_binder(cont);
                     ugm.scroll_listings_to_selected();
                 });
+            // $(sort_links.get(0)).trigger('click');
         }
     };
     

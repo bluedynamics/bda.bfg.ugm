@@ -45,6 +45,9 @@ class UsersColumnListing(ColumnListing):
     @property
     def items(self):
         ret = list()
+        
+        # XXX: use ``self.model.ldap_users.search``
+        
         for key in self.model:
             target = make_url(self.request,
                               node=self.model,
@@ -55,10 +58,15 @@ class UsersColumnListing(ColumnListing):
             attrs.context.load()
             
             # XXX: from config
-            head = '%s %s %s' % (attrs.get('cn'),
-                                 attrs.get('sn'),
-                                 '<%s>' % attrs.get('mail'))
-            head = head.strip()
+            head = '<span class="sort_name">%s&nbsp;</span>' + \
+                   '<span class="sort_surname">%s&nbsp;</span>' + \
+                   '<span class="sort_email">&lt;%s&gt;</span>'
+            head = head % (attrs.get('cn'), attrs.get('sn'), attrs.get('mail'))
+            
+            #head = '%s %s %s' % (attrs.get('cn'),
+            #                     attrs.get('sn'),
+            #                     '<%s>' % attrs.get('mail'))
+            #head = head.strip()
             ret.append({
                 'target': target,
                 'head': head,
@@ -69,6 +77,4 @@ class UsersColumnListing(ColumnListing):
                         'enabled': True,
                         'title': 'Delete User',
                         'target': target}]})
-        cmp = lambda x, y:x['head'].lower() > y['head'].lower() and 1 or -1
-        ret = sorted(ret, cmp=cmp)
         return ret
