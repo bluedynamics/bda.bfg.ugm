@@ -311,6 +311,10 @@ td.left_col {
 #form-userform #input-userform-cancel {
     width: 100px;
 }
+#form-userform #field-userform-id div {
+	width:230px;
+	padding:2px;
+}
 
 /* dict widget XXX: move to yafowil.widget.dict */
 .dictwidget {
