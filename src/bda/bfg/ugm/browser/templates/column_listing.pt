@@ -1,7 +1,7 @@
 <tal:ajax xmlns:ajax="http://namesspaces.bluedynamics.eu/ajax" omit-tag="True">
   
   <div class="columnsorting">
-    <a href="sort_name">name</a>&nbsp;|&nbsp;
+    <a href="sort_name" class="default">name</a>&nbsp;|&nbsp;
     <a href="sort_surname">surname</a>&nbsp;|&nbsp;
     <a href="sort_email">email</a>
   </div>

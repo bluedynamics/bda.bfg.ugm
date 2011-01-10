@@ -332,7 +332,8 @@
                 event.preventDefault();
                 var elem = $(this);
                 var inv = elem.hasClass('inv');
-                sort_links.removeClass('inv')
+                sort_links.removeClass('default')
+                          .removeClass('inv')
                           .removeClass('asc')
                           .removeClass('desc');
                 var cont = $('.columnlisting', elem.parent().parent());
@@ -351,7 +352,7 @@
                 ugm.scroll_listings_to_selected();
                 bdajax.spinner.hide();
             });
-            $(sort_links.get(0)).trigger('click');
+            $('.columnsorting a.default', context).trigger('click');
         }
     };
     
