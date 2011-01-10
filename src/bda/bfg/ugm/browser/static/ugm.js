@@ -316,9 +316,9 @@
                 var a_val = $(sel, a).text().toLowerCase();
                 var b_val = $(sel, b).text().toLowerCase();
                 if (inverse) {
-                    return a_val > b_val ? -1 : 1;
+                    return a_val < b_val ? 1 : -1;
                 } else {
-                    return a_val > b_val ? 1 : -1;
+                    return b_val < a_val ? 1 : -1;
                 }
             }
             return func;
@@ -326,30 +326,32 @@
         
         // sort listings binder
         listing_sort_binder: function(context) {
-            var sort_links = $('.columnsorting a', context)
-                .unbind()
-                .bind('click', function(event) {
-                    event.preventDefault();
-                    var elem = $(this);
-                    var cont = $('.columnlisting', elem.parent().parent());
-                    var inv = false;
-                    if (elem.hasClass('inv')) {
-                        inv = true;
-                        elem.removeClass('inv');
-                    }
-                    var sortname = elem.attr('class');
-                    if (!inv) {
-                        elem.addClass('inv');
-                    }
-                    var sortfunc = ugm.listing_sort_func(sortname, inv);
-                    var sorted = $('ul li', cont).sort(sortfunc);
-                    $('ul', cont).empty().append(sorted);
-                    ugm.left_listing_nav_binder(cont);
-                    ugm.right_listing_nav_binder(cont);
-                    ugm.listing_actions_binder(cont);
-                    ugm.scroll_listings_to_selected();
-                });
-            // $(sort_links.get(0)).trigger('click');
+			var sort_links = $('.columnsorting a', context);
+			sort_links.unbind().bind('click', function(event) {
+				bdajax.spinner.show();
+                event.preventDefault();
+				var elem = $(this);
+				var inv = elem.hasClass('inv');
+				sort_links.removeClass('inv')
+				          .removeClass('asc')
+                          .removeClass('desc');
+                var cont = $('.columnlisting', elem.parent().parent());
+                if (inv) {
+					elem.addClass('asc');
+				} else {
+                    elem.addClass('inv').addClass('desc');
+                }
+				var sortname = elem.attr('href');
+                var sortfunc = ugm.listing_sort_func(sortname, inv);
+                var sorted = $('ul li', cont).sort(sortfunc);
+                $('ul', cont).empty().append(sorted);
+                ugm.left_listing_nav_binder(cont);
+                ugm.right_listing_nav_binder(cont);
+                ugm.listing_actions_binder(cont);
+                ugm.scroll_listings_to_selected();
+				bdajax.spinner.hide();
+            });
+			$(sort_links.get(0)).trigger('click');
         }
     };
     
