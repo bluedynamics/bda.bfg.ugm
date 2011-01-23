@@ -8,7 +8,7 @@ import unittest2 as unittest
 
 from plone.testing import layered, Layer
 
-from bda.ldap.testing import LDIF_users300
+from node.ext.ldap.testing import LDIF_users300
 
 
 class Base(Layer):

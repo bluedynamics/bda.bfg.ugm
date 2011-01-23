@@ -1,9 +1,9 @@
 import os
 from zope.interface import implements
-from bda.ldap import LDAPProps
-from bda.ldap.base import testLDAPConnectivity
-from bda.ldap.node import queryNode
-from bda.ldap.users import LDAPUsersConfig
+from node.ext.ldap import LDAPProps
+from node.ext.ldap.base import testLDAPConnectivity
+from node.ext.ldap.bbb import queryNode
+from node.ext.ldap.users import LDAPUsersConfig
 from repoze.bfg.security import (
     Everyone,
     Allow,

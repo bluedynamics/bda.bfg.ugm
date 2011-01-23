@@ -1,5 +1,5 @@
 from odict import odict
-from bda.ldap.scope import (
+from node.ext.ldap.scope import (
     BASE,
     ONELEVEL,
     SUBTREE,

@@ -29,7 +29,7 @@ setup(name='bda.bfg.ugm',
       install_requires=[
           'setuptools',
           'bda.bfg.app',
-          'bda.ldap',
+          'node.ext.ldap',
           'yafowil.widget.datetime',
           'yafowil.widget.richtext',
           'yafowil.widget.dict',
